@@ -1,0 +1,8 @@
+.modal-dialog {
+	@media screen and (min-width: $min-xs-width){
+		margin: 90px auto 0;
+	}
+	@media screen and (min-width: $min-lg-width){
+		margin: 200px auto 0;
+	}
+}

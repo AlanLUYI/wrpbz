@@ -1,0 +1,100 @@
+$font-family: Helvetica, Arial, 'Microsoft YaHei', sans-serif;
+
+/*navbar*/
+$navbar-bg-color:#005bac;
+$navbar-fg-color: #ffffff;
+
+/*sidepanel*/
+$gutter: 10px;
+$min-xs-width: 768px;
+$min-lg-width: 1200px;
+$page-top: 80px;
+$mini-panel-width: 104px;
+$default-panel-width: 350px;
+$panel-bg-color: #ffffff;
+$panel-title-color: #3981C0;
+$nav-fg-color: #555555;
+$border-color: #b7bdc5;
+$group-item-color: #d05756;
+$without-like-color: silver;
+$like-color: #ff8040;
+$max-z-index: 2147483647;
+$btn-border-color: #57585a;
+$row-no-location-color: silver;
+
+/*monitor*/
+$monitor-top: 8px;
+$monitor-right: 9px;
+$monitor-bg-color: rgb(44, 57, 123);
+$monitor-on-bg-color: rgb(139, 255, 140);
+$monitor-on-width: 10px;
+$monitor-on-height: 10px;
+$monitor-off-width: 14px;
+$monitor-off-height: 14px;
+$monitor-off-border-color: rgb(237, 237, 237);
+$monitor-off-bg-color: gray;
+$shine-green-color: rgb(139, 255, 140);
+$shine-red-color: rgb(255, 81, 81);
+
+/*legend*/
+$legend-right: 5px;
+$legend-bottom: 5px;
+$legend-bg-color: #ffffff;
+$legend-title-height: 30px;
+$legend-title-color: #ffffff;
+$legend-title-bg-color:#005bac;
+$max-lengend-height: 250px;
+
+/*infowindow tab*/
+$infowindow-tab-border-color: #c9c3ba;
+$tab-color: #42454a;
+$tab-bg-color: #dedbde;
+$tab-border-color: #c9c3ba;
+$tab-selected-color: #000000;
+$tab-content-bg-color: #f1f0ee;
+
+$tile-bg-color: #196bb5;
+$tile-fg-color: #ffffff;
+
+/*warn response,0-4*/
+$warn-colors: (#3ab510, #e70d0d, #dd560c, #ceaf02, #0c99e2);
+
+/*menu*/
+$menu-fg-color: #ffffff;
+$menu-open-color: #005bac;
+$menu-open-bg-color: #ffffff;
+$menu-bg-image: "../images/icon-spirit.png";
+$menu-width: 30px;
+$menu-height: 30px;
+$submenu-icon-width: 16px;
+$submenu-icon-height: 16px;
+$submenu-bg-image: "../images/submenu-icon.png";
+$submenu-disabled-color: #bbbbbb;
+$dropdown-menu-max-height: 600px;
+
+/*map switch*/
+$map-toggle-right:15px;
+$map-toggle-top: 15px;
+$map-toggle-width: 68px;
+$map-toggle-height: 68px;
+$map-toggle-border-color: rgba(102, 102, 102, 0.5);
+$map-toggle-image: "../images/layers.png";
+
+/*flash effect */
+$flash-el-width: 5px;
+$flash-el-height: 5px;
+$flash-color: #ff0000;
+
+/*context menu */
+$context-menu-bg-color: #ffffff;
+$context-menu-border-color: #cccccc;
+$context-menu-disabled-color: #bbb;
+$context-menu-disabled-bgcolor: #dadada;
+$context-menu-hover-bgcolor: #4281f4;
+$context-menu-hover-color: #ffffff;
+
+
+
+
+
+

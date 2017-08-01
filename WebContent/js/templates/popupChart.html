@@ -1,0 +1,34 @@
+<div id="popup-chart-wrapper">
+	<form class="form-inline" role="form">
+		<div class="form-group" style="margin-right: 5px;">
+			<label class="checkbox-inline" style="padding-left: 0;">
+				<input type="radio" name="popup-timepicker" value="TYPE_POPUP_DAY" data-target="#popup-day-timepicker" checked>按日
+			</label>
+			<label class="checkbox-inline" style="padding-left: 0;">
+				<input type="radio" name="popup-timepicker" disabled="disabled" value="TYPE_POPUP_HOUR" data-target="#popup-hour-timepicker">按时
+			</label>
+		</div>
+		<div class="timepicker-wrapper" id="popup-day-timepicker" style="display: inline-block;">
+			<div class="form-group">
+				<label for="popup-day-start-tm" class="control-label">开始：</label>
+				<input type="text" class="form-control input-sm" id="popup-day-start-tm" style="width: 120px; height: 24px;" readonly>
+			</div>
+			<div class="form-group">
+				<label for="popup-day-end-tm" class="control-label">结束：</label>
+				<input type="text" class="form-control input-sm" id="popup-day-end-tm" style="width: 120px; height: 24px;" readonly>
+			</div>
+		</div>
+		<div class="timepicker-wrapper hidden" id="popup-hour-timepicker" style="display: inline-block;">
+			<div class="form-group">
+				<label for="popup-hour-start-tm" class="control-label">开始：</label>
+				<input type="text" class="form-control input-sm" id="popup-hour-start-tm" style="width: 120px; height: 24px;padding:5px 2px;" readonly>
+			</div>
+			<div class="form-group">
+				<label for="popup-hour-end-tm" class="control-label">结束：</label>
+				<input type="text" class="form-control input-sm" id="popup-hour-end-tm" style="width: 120px; height: 24px;padding:5px 2px;" readonly>
+			</div>
+		</div>
+		<button class="btn btn-xs btn-primary">查询</button>
+	</form>
+	<div id="popup-chart" style="height:210px;"></div>
+</div>

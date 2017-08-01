@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>组织机构设置</title>
+		
+		<link href="../css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css">	
+		<link href="css/authority.css" media="all" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="../../libs/pintuer/pintuer.css">	
+		
+		<script src="../../libs/jquery/jquery-1.11.1.min.js"></script>
+		<script src="../../libs/pintuer/pintuer.js"></script> 
+		<script src="../../libs/zTree-3.5.12/jquery.ztree.core-3.5.js" type="text/javascript"></script>
+		<script src="../../libs/zTree-3.5.12/jquery.ztree.excheck-3.5.js" type="text/javascript"></script>
+		<script src="../../libs/util/user.js" type="text/javascript" ></script>		
+	    <script src="javascript/authority.js"></script>
+</head>
+<body>
+	<div class="" style="width: 100%;height: 100%;margin: auto;">
+		<div class="tab" style='height:calc(100% - 0px)'>
+			<div class="tab-head">
+				<ul class="tab-nav">
+					<li class="active"><a href="#tab1">管理单位</a></li>
+					<li ><a href="#tab2">部门管理</a></li>
+				</ul>
+			</div>
+			<div class="tab-body" >
+				<div class="tab-panel active"  id="tab1" style='padding: 5px;'>
+					<div class='x6 float-left'>
+						<img src='images/jianjie.jpg' style='width:100%'>
+					</div>
+					<div class='x6 float-left' style='padding-left: 15px;'>
+						<h3 style='font-weight:bold'>单位简介</h3>
+						<p style='text-indent: 30px;'>管理局负责管理和调度两大水系范围内水利工程，主要有主城区100 年一遇防洪堤
+							15.455 公里，沿江沿海中型水闸14 座、小型水闸41 座，瓯江翻水站（属大型泵站，始
+							建于1971 年，总装机4500KW，设计提水扬程18.56 米，设计流量15m3/s，输水渠道
+							总长30 公里，包括明渠、暗渠、隧洞、渡槽、倒虹吸、排洪渠、水闸等水工建筑物147
+							座），潘山翻水站（属中型泵站，始建于1962 年，总装机1150KW，设计提水扬程7.2
+							米，设计流量10m3/s，输水渠道总长8 公里）及西向排洪工程（设计流量350m3/s，包
+							括仙门湖、梅屿大河、梅屿控制闸、梅屿隧洞、卧旗大河、卧旗水闸及相关河道整治等
+							组成，线路全长6699.96m）等工程。</p>
+					</div>
+					<hr style=''>
+					<div class='x12'>
+						<h3 style='font-weight:bold;margin-bottom: 10px;'>单位详情</h3>
+						<table class='table'>
+							<tr><td>单位名称：温州市温瑞平水系管理局</td><td>单位地址：温州市鹿城区瓯江路灰桥新闸管理楼</td></tr>
+							<tr><td>上级水行政主管部门：温州市水利局</td><td>单位级别：副县级</td></tr>
+							<tr><td>单位性质：纯公益事业</td><td>责任人：胡理相</td></tr>
+							<tr><td>编制总数：80</td><td>在岗职工总数：83</td></tr>
+							<tr><td>单位电话：</td><td>单位传真：</td></tr>
+							<tr><td>防汛值班电话：</td><td>通过标准化验收时间：</td></tr>
+							<tr></tr>
+						</table>
+					</div>
+					<hr style=''>
+					<div class='x12'>
+						<h3 style='font-weight:bold;margin-bottom: 10px;'>单位职责</h3>
+						<p>（一）负责温瑞平水系防汛防台抗旱和生态调水；</p>
+						<p>（二）负责温瑞平水系沿江沿海水闸运行和管理；</p>
+						<p>（三）负责瓯江翻水站、潘山翻水站及输水渠道的运行和管理；</p>
+						<p>（四）负责卧旗山至蒲州水闸主城区堤塘运行和管理；</p>
+						<p>（五）组织拟定并实施温瑞平水系中长期水利发展规划和建设计划；</p>
+						<p>（六）配合市水政监察支队做好温瑞平水系水政监察工作；</p>
+						<p>（七）参与温瑞平水系范围内重要涉水建设项目的论证工作。</p>
+					</div>
+				</div>
+				<div class="tab-panel" id="tab2" style='padding: 5px;'>
+					<div class='x2 float-left panel panel-primary'>
+						<div class='panel-heading'>部门列表</div>
+						
+						<ul class='accordion'>
+							<!-- <li><div class='link'>局领导</div></li> -->
+							<li class='click' id='dep1'><div class='link'>办公室</div></li>
+							<li id='dep2'><div class='link'>工程建设处</div></li>
+							<li id='dep3'><div class='link'>城区管理处</div></li>
+							<li id='dep4'><div class='link'>瑞平管理处</div></li>
+							<li id='dep5'><div class='link'>瓯江翻水管理处</div></li>
+						</ul>
+					</div>
+					<div class='x10 float-left' style='    padding: 5px 10px;'>
+						<div id='detail' style='font-size: 14px;
+    line-height: 25px;'>
+							<div id='dep1-wrapper' >
+								<h2 style='font-weight:bold;margin-bottom: 10px;'>部门详情</h2>
+								<table class='table'>
+									<tr><td><label>部门名称：</label>办公室</td></tr>
+									<tr><td><label>电话：</label>12345678</td></tr>
+									<tr><td><label>传真：</label>1111111</td></tr>
+									<tr><td><label>部门负责人：</label>何克密</td></tr>
+									<tr><td><label>分管领导：</label>许方安</td></tr>
+									<tr><td><label>部门人数：</label>9</td></tr>
+									<tr><td><label>排序：</label>1</td></tr>
+									<tr><td><label>部门职能：</label>协助局领导处理管理局机关日常行政事务；负责各处室综合协调、催办督查工作；
+									负责文秘、信息、宣传、财务、统计、保密、档案、制度建设、来信来访、建议提案、
+									会务后勤、资产管理、社会管理等事务工作；负责人事教育、年度考核、工资福利、计
+									划生育、离退休人员等管理服务。</td></tr>
+								</table>
+							</div>
+							<div id='dep2-wrapper' style='display:none'>
+								<h2 style='font-weight:bold;margin-bottom: 10px;'>部门详情</h2>
+								<table class='table'>
+									<tr><td><label>部门名称：</label>工程建设处</td></tr>
+									<tr><td><label>电话：</label>12345678</td></tr>
+									<tr><td><label>传真：</label>1111111</td></tr>
+									<tr><td><label>部门负责人：</label>李西宗</td></tr>
+									<tr><td><label>分管领导：</label>许方安</td></tr>
+									<tr><td><label>部门人数：</label>5</td></tr>
+									<tr><td><label>排序：</label>1</td></tr>
+									<tr><td><label>部门职能：</label>组织拟定温瑞平水系水利工作年度计划；负责新建或维修加固项目前期申报、报批
+和招投标等前期工作；牵头负责在建工程项目的建设管理工作；负责水利工程观测、安
+全鉴定（安全认定）、水工程报废等监管工作。
+负责温瑞平水系防汛防台抗旱和生态用水调度；负责应急抢险预案的制订、修编，
+并监督实施；负责信息化建设与管理；组织拟定水利安全生产规章制度，并监督实施；
+负责水工程建设、运行管理劳动保护和安全生产监管；配合市水政监察支队做好水利工
+程管理和保护范围内的水政监察事务。</td></tr>
+								</table>
+							</div>
+							<div id='dep3-wrapper' style='display:none'>
+								<h2 style='font-weight:bold;margin-bottom: 10px;'>部门详情</h2>
+								<table class='table'>
+									<tr><td><label>部门名称：</label>城区管理处</td></tr>
+									<tr><td><label>电话：</label>12345678</td></tr>
+									<tr><td><label>传真：</label>1111111</td></tr>
+									<tr><td><label>部门负责人：</label>王  义</td></tr>
+									<tr><td><label>分管领导：</label>王忠明</td></tr>
+									<tr><td><label>部门人数：</label>13</td></tr>
+									<tr><td><label>排序：</label>1</td></tr>
+									<tr><td><label>部门职能：</label>负责瓯江沿江沿海水闸（主城区堤塘）的运行管理、维修养护、安全生产及应急抢
+险；合理控制温瑞平水系水位，发挥水利工程防汛、防台、抗旱、生态调水、御潮的功
+能，保障温瑞灌区工农业生产、内河航运和生态用水；负责新建或维修加固项目施工现
+场管理；负责水利工程管理和保护范围内日常管理及有关政策处理等工作。</td></tr>
+								</table>
+							</div>
+							<div id='dep4-wrapper' style='display:none'>
+								<h2 style='font-weight:bold;margin-bottom: 10px;'>部门详情</h2>
+								<table class='table'>
+									<tr><td><label>部门名称：</label>瑞平管理处</td></tr>
+									<tr><td><label>电话：</label>12345678</td></tr>
+									<tr><td><label>传真：</label>1111111</td></tr>
+									<tr><td><label>部门负责人：</label>郑加财</td></tr>
+									<tr><td><label>分管领导：</label>王忠明</td></tr>
+									<tr><td><label>部门人数：</label>22</td></tr>
+									<tr><td><label>排序：</label>1</td></tr>
+									<tr><td><label>部门职能：</label>负责飞云江沿江沿海水闸的运行管理、维修养护、安全生产及应急抢险；合理控制
+温瑞平水系水位，发挥水利工程防汛、防台、抗旱、生态调水、御潮的功能，保障温瑞、
+瑞平灌区工农业生产、内河航运和生态用水；负责新建或维修加固项目施工现场管理；
+负责水利工程管理和保护范围内日常管理及有关政策处理等工作。</td></tr>
+								</table>
+							</div>
+							<div id='dep5-wrapper' style='display:none'>
+								<h2 style='font-weight:bold;margin-bottom: 10px;'>部门详情</h2>
+								<table class='table'>
+									<tr><td><label>部门名称：</label>瓯江翻水管理处</td></tr>
+									<tr><td><label>电话：</label>12345678</td></tr>
+									<tr><td><label>传真：</label>1111111</td></tr>
+									<tr><td><label>部门负责人：</label>裘益华</td></tr>
+									<tr><td><label>分管领导：</label>王忠明</td></tr>
+									<tr><td><label>部门人数：</label>18</td></tr>
+									<tr><td><label>排序：</label>1</td></tr>
+									<tr><td><label>部门职能:</label>负责温瑞平塘河生态翻水、生活应急供水和抗旱工作；负责翻水站及配套设施的运
+行管理、维修养护、防汛、防台、安全生产及应急抢险；负责新建或维修加固项目施工
+现场管理；负责水利工程管理和保护范围内日常管理及有关政策处理等工作。</td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var logManager;
+		(function($,undefined){
+			$(function(){ 
+				logManager = new LogManager({table: $("#table-bx")});
+			});
+		}(jQuery))
+	</script>
+	</body>
+</html>

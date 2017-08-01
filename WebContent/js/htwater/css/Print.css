@@ -1,0 +1,41 @@
+.print-dijit .print-results-wrapper {
+    padding-top: 15px;
+}
+
+.print-dijit .print-result {
+    margin-bottom: 3px;
+}
+
+.print-dijit .print-result .bold {
+    font-weight: bold;
+}
+
+.print-dijit .print-result-error {
+    font-weight: bold;
+    color: red;
+}
+
+.print-dijit .print-result-hover:hover{
+    background-color: #D4E7F8;
+    cursor: pointer;
+}
+
+.print-dijit .print-result-name{
+    height: 24px;
+}
+
+.print-dijit .print-result-name .progress{
+    margin-bottom: 0;
+}
+
+.print-dijit .dropdown-print-settings{
+	width:300px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.print-dijit .control-label.normal{
+	font-weight: normal;
+}
+
+

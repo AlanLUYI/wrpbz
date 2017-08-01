@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>管理事项</title>
+		
+		
+		<link rel="stylesheet" href="../../libs/bootstrap/css/bootstrap.min.css">	
+		<link rel="stylesheet" href="../../libs/bootstrap-table/bootstrap-table.min.css">	
+		<link href="manageT.css" media="all" rel="stylesheet" type="text/css" />
+		
+		<script src="../../libs/jquery/jquery-1.11.1.min.js"></script>
+		<script src="../../libs/bootstrap/js/bootstrap.js"></script> 
+		<script src="../../libs/bootstrap-table/bootstrap-table.min.js"></script> 
+		
+	    <script src="manageT.js"></script>
+</head>
+<body>
+	<div style="width: 100%;height: 100%;margin: auto;padding: 5px;">
+		<div class="tab" style='height:calc(100% - 0px)'>
+			<div class='form-inline' id='toolbar'>
+				<label>事项名称</label>
+				<input class='form-control input-sm' id='search'>
+				<button type='button' class='btn btn-primary btn-sm' id='add'>新增</button>
+				<button type='button' class='btn btn-success btn-sm' id='edit'>编辑</button>
+				<button type='button' class='btn btn-danger btn-sm' id='delete'>删除</button>
+			</div>
+			<table class='table table-bordered'
+			 data-toolbar='#toolbar'
+			 data-pagination='true' id='table-bx'></table>
+		</div>
+	</div>	
+	<script type="text/javascript">
+		var logManager;
+		(function($,undefined){
+			$(function(){ 
+				logManager = new LogManager({table: $("#table-bx")});
+			});
+		}(jQuery))
+	</script>
+	</body>
+</html>

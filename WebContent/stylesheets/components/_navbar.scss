@@ -1,0 +1,34 @@
+.navbar-expand {
+	margin-bottom: 0;
+	background-color: $navbar-bg-color;
+	border: none;
+	@include border-radius(0);
+	color: $navbar-fg-color;
+	
+	.navbar-header{
+		margin-right: $gutter * 2;
+		
+		h3 {
+			margin-top: 0;
+			margin-bottom: $gutter * 1.5;
+		}
+		
+		h4{
+			margin-top: $gutter * 1.5;
+			margin-bottom: $gutter * 0.5;
+		}
+	}
+	
+	.navbar-brand{
+		padding: $gutter $gutter * 1.5;
+		
+		 > img{
+			@media screen and (min-width: $min-xs-width){
+				display: none;
+			}
+			@media screen and (min-width: $min-lg-width){
+				display: block;
+			}
+		}
+	}
+}

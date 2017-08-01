@@ -1,0 +1,37 @@
+#context-menu-wrapper {
+	position: absolute;
+	display: none;
+	background: $context-menu-bg-color;
+	font-size: 13px;
+	z-index: 9999;
+	
+	ul {
+		margin: 0;
+		padding: $gutter * 0.5 0;
+		list-style: none;
+		@include border($direction: null, $color: $context-menu-border-color);
+		@include box-shadow(0 6px 12px rgba(0, 0, 0, .175));
+		
+		li {
+			padding: $gutter * 0.2 $gutter * 0.5;
+			
+			&.disabled {
+				color: $context-menu-disabled-color;
+				&:hover{
+					background-color: $context-menu-disabled-bgcolor;
+					cursor: default;
+				}
+			}
+			&:hover {
+				background-color: $context-menu-hover-bgcolor;
+				color: $context-menu-hover-color;
+				cursor: pointer;
+			}
+			
+			span {
+				display: inline-block;
+				padding-left: $gutter * 0.5;
+			}
+		}
+	}
+}

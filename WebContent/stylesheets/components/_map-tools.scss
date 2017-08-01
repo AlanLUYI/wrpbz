@@ -1,0 +1,72 @@
+#measure-wrapper,
+#print-wrapper,
+#fullextent-wrapper,
+#search-wrapper {
+	position: absolute;
+	z-index: 30;
+}
+#measure-wrapper {
+	top: 20px;
+	left: 60px;
+}
+#measure-wrapper .dropdown-menu {
+	min-width: 80px;
+}
+#print-wrapper {
+	top: 20px;
+	left: 112px;
+}
+#printDijitWrapper {
+	width: 300px;
+	padding: $gutter * 1.5;
+}
+#fullextent-wrapper {
+	top: 90px;
+	left: 20px;
+}
+#search-wrapper {
+	top: 20px;
+	left: 164px;
+}
+#fullextent-wrapper .btn-sm {
+	font-size: 14px;
+	border-color: $btn-border-color;
+	outline: none;
+}
+#fullextent-wrapper .btn-default:focus,
+#fullextent-wrapper .btn-default.focus {
+	background-color: $panel-bg-color;
+}
+#measure-wrapper>.dropdown>.dropdown-toggle,
+#print-wrapper>.dropdown>.dropdown-toggle {
+	border-color: $btn-border-color;
+}
+
+.map {
+	> .tooltip{
+		width: auto;
+	    @include opacity(1);
+		font: {
+			family: $font-family;
+		}
+		@include border(null, $color: red);
+		@include border-radius(0);
+		padding: $gutter * 0.3 $gutter * 0.5;
+	}
+}
+
+.map-tools {
+	.tooltip {
+		width: auto;
+		border: none;
+		background-color: transparent;
+		padding: $gutter * 0.5 0;
+		font: {
+			size: ceil(14px * 0.75);
+		}
+	}
+}
+
+.arcgisSearch .searchBtn{
+	width: 20px;
+}

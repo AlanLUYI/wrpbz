@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<title>登陆-温瑞平水系工程标准化管理平台</title>
+		<link rel="shortcut icon" href="./logo.png" type="image/x-icon">
+		<link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap-validator/bootstrapValidator.min.css">
+		
+		<style type="text/css">
+			html,body{
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				background: #008fd5;
+				background-size: cover;
+				font-family: Helvetica, 'Microsoft YaHei', sans-serif;
+			}
+			#container{
+				width: 460px;
+				margin: 0 auto;
+				_height: 100%;
+				min-height: 100%;
+			}
+			.inner-container {
+				padding: 150px 0 50px;
+				zoom: 1;
+			}
+			.title-wrapper {
+				height: 60px;
+				text-indent: -9999px;
+				overflow: hidden;
+				background: url("./images/cloud_fangxun.png") center center no-repeat;
+			}
+			.copyright {
+				height: 50px;
+				margin: -50px 0 0;
+				color:#d3f2ff;
+			}
+			.form-wrapper {
+				margin-top: 200px;
+			}
+			.form-wrapper .form-group {
+				vertical-align: top;
+			}		
+			.btn-orange {
+				color: white;
+				background-color: #fe6706;
+				border-color: #fe6706;
+			}
+			.btn-orange:hover,.btn-orange:focus,.btn-orange.focus,.btn-orange:active,.btn-orange.active {
+				color: #fff;
+				background-color: #e35d06;
+				border-color: #e35d06
+			}
+			p.toptxt {
+			    width: 100%;
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    padding: 14px 0px 14px 0px;
+			    background: #000;
+			    color: #fff;
+			    font: 12px "宋体";
+			    display: block;
+			    text-indent: 20px;
+			    opacity: 0.3;
+			    filter: alpha(opacity=30);
+			}
+			.footer {
+			    position: fixed;
+			    bottom: 10px;
+			    left: 0px;
+			    height: 55px;
+			    width: 100%;
+			    overflow: hidden;
+			    text-align: center;
+			    color: #fff;
+			    font-size: 14px;
+			    min-width: 500px;
+			}
+			.logo {
+			    margin-left: -270px;
+			    top: 80px;
+			    height: 145px;
+			    width: 1125px;
+			   /*  background-image: url(images/logintitle.png); */
+			    background-repeat: no-repeat;
+			    background-size: 980px;
+			    background-position: inherit;
+			    overflow: hidden;
+			    position: relative;
+			}
+			.loginbox {
+			        height: 630px;
+				    width: 790px;
+				    background-image: url(images/loginbg.png);
+				    background-repeat: no-repeat;
+				    background-position: center;
+				    overflow: hidden;
+				    margin-left: -160px;
+				    position: absolute;
+				    margin-top: -200px;
+			}
+			#username,#password {
+				    width: 290px;
+    				height: 40px;
+			}
+			#password {margin-top: 10px;}
+			#form-login {
+			       margin-left: 225px;
+				    margin-top: 175px;
+				    position: absolute;
+				    z-index: 999;
+			}
+			.form-group {
+			    display: block !important;
+			}
+			#btn-login {
+			    margin-left: 100px;
+			    margin-top: -5px;
+			    width: 120px;
+			}
+			#checkDiv {
+				color: #838383;font-size: 12px;font-weight: normal !important;
+				    margin-top: 15px;    margin-left: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="logo"></div>
+			<div class="loginbox" style='text-align:center;'></div>
+			<form class="form-inline" id="form-login" name="form-login" role="form" data-toggle="validator">
+				<div class="form-group">
+					<label class="sr-only" for="username">用户名</label>
+					<input type="text" class="form-control" id="username" name="username"  placeholder="用户名"  autocomplete="off" required autofocus>
+				</div>
+				<div class="form-group">
+					<label class="sr-only" for="password">密码</label>
+					<input type="password" class="form-control" id="password" name="password" placeholder="密码" required>
+				</div>
+				<label id="checkDiv"><input name="" type="checkbox" class="" checked="checked">记住密码</label>
+				<button type="submit" class="btn btn-orange" id="btn-login">登录</button>
+			</form>
+			<div class="footer">
+			    <p>COPY RIGHT ©2017 温瑞平水系管理局</p>
+			    <p>技术支持:宁波弘泰水利信息科技有限公司  推荐浏览器：360浏览器(极速模式)</p>
+			</div>
+			<p class="toptxt">欢迎登录温瑞平水系工程标准化管理平台</p>
+		</div>
+		<script src="./libs/jquery/jquery-1.11.1.min.js"></script>
+		<script src="./libs/bootstrap-validator/bootstrapValidator.min.js"></script>
+		<script src="./libs/jquery.md5.js"></script>
+		<!-- <script src="http://profile.qgj.cn/profilejs.axd"></script> -->
+		<script type="text/javascript">
+			(function($){
+				$.extend({
+					getParams: function(name){
+						return (RegExp("[\?&]" + name + "=([^&]+)","i").exec(window.location.search) || [,""])[1];
+					}
+				});
+			})(jQuery);
+		</script>
+		<script>
+			(function($, localStorage, undefined){
+				$.ajaxPrefilter(function(options, originalOptions, jqXHR){
+					originalOptions.data.password = $.md5(originalOptions.data.password).toUpperCase();
+					options.data = $.param(originalOptions.data);
+				});
+				
+				if(localStorage.getItem("expire") && new Date().getTime() <= (+localStorage.getItem("expire"))){
+					if (localStorage.getItem("loginname") && localStorage.getItem("password")) {
+						$("[name='username']").val(localStorage.getItem("loginname"));
+						$("[name='password']").val(localStorage.getItem("password"));
+						$("[name='remeber']").prop("checked", true);
+					}
+				}else{
+					localStorage.removeItem("loginname");
+					localStorage.removeItem("password");
+					localStorage.removeItem("expire");
+				}
+				
+				$("#form-login").bootstrapValidator({
+					fields: {
+						username:{
+							validators: {
+								notEmpty: {
+									message: "用户名未填写"
+								}
+							}
+						},
+						password: {
+							validators: {
+								notEmpty: {
+									message: "密码未填写"
+								}
+							}
+						}
+					}
+				})
+				.on("success.field.bv",function(event,data){
+					if(data.field === "password"){
+						data.element.closest(".form-group").find("small.invalid").remove();
+						$(event.currentTarget).data("bootstrapValidator").revalidateField("username");
+					}
+				})
+				.on("success.form.bv",function(event){
+					event.preventDefault();
+					
+					var validator = $(event.target).data("bootstrapValidator"),
+					username = validator.getFieldElements("username").val(),
+					password = validator.getFieldElements("password").val();
+					$.ajax({
+						url: "login!login",
+						type: "POST",
+						dataType: "json",
+						data: {loginname: username,password:password}
+					}).then(function(json){
+						if(json && json.success){
+							if(validator.getFieldElements("remeber").prop("checked")){
+								localStorage.setItem("loginname",username);
+								localStorage.setItem("password",password);
+								localStorage.setItem("expire", new Date().getTime() + 30*24*3600*1000);
+							}else{
+								localStorage.removeItem("loginname");
+								localStorage.removeItem("password");
+								localStorage.removeItem("expire");
+							}
+							window.location.replace("./index.html");
+						}else{
+							validator.getFieldElements("password").closest(".form-group").addClass("has-error").append("<small class='help-block invalid'>"+json.message+"</small>");
+							validator.getFieldElements("username").closest(".form-group").addClass("has-error");
+						}
+					});
+				});
+			})(jQuery,localStorage);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dispatcher>
+	<bean name="login" className="net.htwater.hos.action.LoginAction"
+		needAuthenticate="no"></bean>
+	<bean name="user" className="net.htwater.hos.action.UserAction"
+		needAuthenticate="yes"></bean>
+	<bean name="SLGC" className="net.htwater.hos.action.SlgcAction"
+		needAuthenticate="yes"></bean>
+	<bean name="allocation" className="net.htwater.hos.action.AllocationAction"
+		needAuthenticate="yes"></bean>
+	<bean name="util" className="net.htwater.hos.action.UtilAction"
+		needAuthenticate="yes"></bean>
+	<bean name="webos" className="net.htwater.webos.WebosAction"
+		needAuthenticate="yes"></bean>
+	<bean name="Wechart" className="net.htwater.hos.action.WechartAction"
+		needAuthenticate="no"></bean>
+	<bean name="Fxyw" className="net.htwater.hos.action.FxywAction"
+		needAuthenticate="yes"></bean>
+	<bean name="SYQ" className="net.htwater.hos.action.SyqAction"
+		needAuthenticate="yes"></bean>
+	<bean name="GQ" className="net.htwater.hos.action.GqAction"
+		needAuthenticate="yes"></bean>
+	<bean name="FLOOD" className="net.htwater.hos.action.FloodAction"
+		needAuthenticate="yes"></bean>
+	<bean name="FxRelate" className="net.htwater.hos.action.FxRelateAction"
+		needAuthenticate="yes"></bean>
+	<bean name="PUBLIC" className="net.htwater.hos.action.PublicAction"
+		needAuthenticate="no"></bean>
+	<bean name="userutil" className="net.htwater.mydemo.action.UserUtilAction"
+		needAuthenticate="no"></bean>
+	<bean name="SLGC" className="net.htwater.hos.action.SlgcAction"
+		needAuthenticate="no"></bean>
+	<bean name="mydemo" className="net.htwater.mydemo.action.MydemoAction"
+		needAuthenticate="no"></bean>
+	<bean name="FXGL" className="net.htwater.mydemo.action.FxglAction"
+		needAuthenticate="no"></bean>
+	<bean name="Xuncha" className="net.htwater.mydemo.action.XunchaAction"
+		needAuthenticate="no"></bean>
+	<bean name="Business" className="net.htwater.mydemo.action.BusinessAction"
+		needAuthenticate="no"></bean>
+	<bean name="office" className="net.htwater.mydemo.action.OfficeAction"
+		needAuthenticate="no"></bean>
+</dispatcher>

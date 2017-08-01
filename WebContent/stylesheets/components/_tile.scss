@@ -1,0 +1,21 @@
+.tile{
+	float: left;
+	width: 38px;
+	height: 24px;
+	margin:0 2px 2px 0;
+	line-height: 24px;
+	background: $tile-bg-color;
+	text-align: center;
+	overflow: hidden;
+	
+	a {
+		display: block;
+		height: 100%;
+		color: $tile-fg-color;
+	}
+}
+.tile-large{
+	width: 78px;
+	height: 26px;
+	line-height: 26px;
+}

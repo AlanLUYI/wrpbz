@@ -1,0 +1,94 @@
+.monitor {
+	position: absolute;
+	background-color: $monitor-bg-color;
+	top: $monitor-top;
+	right: $monitor-right;
+	@include border-radius(50%);
+	cursor: pointer;
+	
+	> div{
+		width: $monitor-on-width;
+		height: $monitor-on-height;
+		background-color: $monitor-on-bg-color;
+		@include border-radius(50%);
+		margin: 2px;
+	}
+	
+	&.off{
+		width: $monitor-off-width;
+		height: $monitor-off-height;
+		@include border(null, $width: 2px, $color: $monitor-off-border-color);
+		background-color: $monitor-off-bg-color;
+		> div{
+			display: none;
+		}
+	}
+}
+
+.shineGreen {
+	@include animation(shineGreen 3s ease infinite);
+}
+
+@include keyframes(shineGreen) {
+	0% {
+		background: $shine-green-color;
+	}
+	3% {
+		background: transparent;
+	}
+	6% {
+		background: $shine-green-color;
+	}
+	9% {
+		background: transparent;
+	}
+	12% {
+		background: $shine-green-color;
+	}
+	40% {
+		background: $shine-green-color;
+	}
+	43% {
+		background: transparent;
+	}
+	46% {
+		background: $shine-green-color;
+	}
+	100% {
+		background: $shine-green-color;
+	}
+}
+
+.shineRed {
+	@include animation(shineRed 3s ease infinite)
+}
+
+@include keyframes(shineRed){
+	0% {
+		background: $shine-red-color;
+	}
+	3% {
+		background: transparent;
+	}
+	6% {
+		background: $shine-red-color;
+	}
+	9% {
+		background: transparent;
+	}
+	12% {
+		background: $shine-red-color;
+	}
+	40% {
+		background: $shine-red-color;
+	}
+	43% {
+		background: transparent;
+	}
+	46% {
+		background: $shine-red-color;
+	}
+	100% {
+		background: $shine-red-color;
+	}
+}

@@ -1,0 +1,12 @@
+<div id="module-wrapper">
+	<div id="module-inner-wrapper">
+	</div>
+</div>
+<ul class="sidebar">
+	<% _.each(hierarchy.children,function(item,index){ %>
+		<li class="group-item checkbox group-item-<%=item.action%> <%= index==hierarchy.children.length-1 ? 'last' : '' %>">
+			<input type="checkbox" data-id="<%=item.id%>">
+			<span><%=item.name%></span>
+		</li>
+	<% }); %>
+</ul>

@@ -1,0 +1,903 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="表1_行政区划基本情况表" code="表1_行政区划基本情况表" ><!--(对应数据中表：ZT_AD_Info_B) name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+		<column name="行政区划代码" code="adcd" type="String">
+		    <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,行政区划代码不允许为空"></rule>
+			</rules>
+		</column>
+		
+		<column name="行政区划名称" code="adnm" type="String"></column>
+		
+		<column name="土地面积" code="landArea" type="String">
+			<!-- <rules> 
+				<rule name="nullable" message="土地面积不允许为空"></rule>
+			</rules> -->			
+		</column>
+		
+	   <column name="耕地面积" code="cultiArea" type="String">
+	   	 	<!-- <rules> 
+				<rule name="nullable" message="耕地面积不允许为空"></rule>
+			</rules> -->	
+	   </column>	
+ 	  
+	   <column name="总人口" code="population" type="String">
+	   	  <!--  <rules> 
+				<rule name="nullable" message="总人口不允许为空"></rule>
+			</rules> -->	
+	   </column>
+	   
+	   <column name="家庭户数" code="household" type="String"></column>
+	   
+	   <column name="房屋数" code="house" type="String">	   	
+			<!-- <rules>
+				<rule name="nullable" message="房屋数不允许为空"></rule>
+				<rule name="checkUnique" message="房屋数已经存在"></rule>
+			</rules> -->
+	   </column>   
+	   <column name="资料截止日期" code="cutoffDate" type="String"></column>
+   </entity>
+   
+   <entity name="表2_山洪灾害影响情况表" code="表2_山洪灾害影响情况表" ><!--（ZT_AD_DisInflu_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="行政区划代码" code="adcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,行政区划代码不允许为空"></rule>
+			</rules>
+	   </column>
+		
+	   <column name="历史洪水线下人口" code="hulPopulation" type="String"></column>
+		
+	   <column name="历史洪水线下家庭" code="hulHousehold" type="String"></column>	
+ 	  
+	   <column name="历史洪水线下房屋" code="hulHouse" type="String"></column>
+	   
+	   <column name="历史洪水线下农田" code="hulFarmland" type="String"></column>
+	   
+	   <column name="可能受山体滑坡、泥石流影响人口" code="holPopulation" type="String"></column>   
+	   
+	   <column name="可能受山体滑坡、泥石流影响家庭" code="holHousehold" type="String"></column>
+	   
+	   <column name="可能受山体滑坡、泥石流影响房屋" code="holSoiHouse" type="String"></column>
+	   
+	   <column name="资料截止日期" code="cutoffDate" type="String">
+	       <!-- <rules> 
+				<rule name="nullable" message="资料截止日期不允许为空"></rule>
+		   </rules> -->
+	   </column>
+	   
+   </entity>
+   
+   <entity name="表3_小流域基本情况表" code="表3_小流域基本情况表" ><!--（ZT_CA_Info_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="小流域代码" code="cacd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,小流域代码不允许为空"></rule>
+			</rules>
+	   </column>
+		
+	   <column name="小流域名称" code="canm" type="String"></column>
+		
+	   <column name="流域面积" code="caarea" type="String">
+	       <rules> 
+				<rule name="nullable" message="流域面积不允许为空"></rule>
+		   </rules>
+	   </column>	
+ 	  
+	   <column name="上级河流" code="river" type="String"></column>
+	   
+	   <column name="河长" code="rvlen" type="String"></column>
+	   
+	   <column name="河道比降" code="gradient" type="String"></column>   
+	   
+	   <column name="河源位置" code="rvhead" type="String"></column>
+	   
+	   <column name="河口位置" code="rvmouth" type="String"></column>
+	   
+   </entity>
+   
+   <entity name="表4_小流域和乡镇村关联表" code="表4_小流域和乡镇村关联表" ><!--（ZT_CA_AD_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="小流域代码" code="cacd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,小流域代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	    <column name="行政区划" code="adcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,行政区划不允许为空"></rule>
+			</rules>
+	   </column>
+		
+   </entity>
+   
+   <entity name="表5_危险区基本情况表" code="表5_危险区基本情况表" ><!--（ZT_DA_Info_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="危险区代码" code="dacd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,危险区代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	    <column name="所属行政区划代码" code="adcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,所属行政区划代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="危险区名称" code="name" type="String"></column>
+	   
+	   <column name="危险区所在地" code="address" type="String"></column>
+	   
+	   <column name="区内人口" code="population" type="String"></column>
+	   
+	   <column name="区内房屋" code="house" type="String"></column>
+		
+   </entity>
+   
+   <entity name="表6_测站基本信息表" code="表6_测站基本信息表" ><!--（ZT_ST_station_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="测站编码" code="stcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,测站编码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="测站名称" code="stnm" type="String"></column>
+	   
+	   <column name="河流名称" code="rvnm" type="String"></column>
+	   
+	   <column name="水系名称" code="hnnm" type="String"></column>
+	   
+	   <column name="流域名称" code="bsnm" type="String"></column>
+	   
+	   <column name="经度" code="lgtd" type="String">
+	        <rules> 
+				<rule name="nullable" message="经度不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="纬度" code="lttd" type="String">
+	        <rules> 
+				<rule name="nullable" message="纬度不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="站址" code="stlc" type="String"></column>
+	   
+	   <column name="站类" code="sttp" type="String"></column>
+	   
+	   <column name="拼音码" code="phcd" type="String"></column>
+	   
+	   <column name="所在小流域代码" code="cacd" type="String"></column>
+	   
+	   <column name="所在行政区代码" code="adcd" type="String"></column>
+		
+   </entity>
+   
+   <entity name="表7_雨量测站极值表" code="表7_雨量测站极值表" ><!--（ZT_ST_PExtremum_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="雨量监测站代码" code="stcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,测站编码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="1小时最大雨量" code="maxDrp1h" type="String"></column>
+	   
+	   <column name="3小时最大雨量" code="maxDrp3h" type="String"></column>
+	   
+	   <column name="6小时最大雨量" code="maxDrp6h" type="String"></column>
+	   
+	   <column name="12小时最大雨量" code="maxDrp12h" type="String"></column>
+	   
+	   <column name="24小时最大雨量" code="maxDrp24h" type="String"></column>
+	   
+	   <column name="1小时最大雨量发生时间" code="tm1h" type="String"></column>
+	   
+	   <column name="3小时最大雨量发生时间" code="tm3h" type="String"></column>
+	   
+	   <column name="6小时最大雨量发生时间" code="tm6h" type="String"></column>
+	   
+	   <column name="12小时最大雨量发生时间" code="tm12h" type="String"></column>
+	   
+	   <column name="24小时最大雨量发生时间" code="tm24h" type="String"></column>
+		
+   </entity>
+   
+   <entity name="表8_水位测站极值表" code="表8_水位测站极值表" ><!--（ZT_ST_ZExtremum_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="水位监测站代码" code="stcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,水位监测站代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="调查最高水位" code="ihz" type="String"></column>
+	   
+	   <column name="调查最高水位发生时间" code="ihztime" type="String"></column>
+	   
+	   <column name="实测最高水位" code="thz" type="String"></column>
+	   
+	   <column name="实测最高水位发生时间" code="thztime" type="String"></column>
+	   
+   </entity>
+   
+   <entity name="表9_山洪灾害预警指标" code="表9_山洪灾害预警指标" ><!--（ZT_STWarnRule_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="规则ID" code="struleid" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,规则ID不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="测站代码" code="stcd" type="String">
+	       <rules> 
+				<rule name="nullable" message="测站代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="测站超警指标" code="stindex" type="String">
+	       <rules> 
+				<rule name="nullable" message="测站超警指标不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="预警等级ID" code="warngradeid" type="String">
+	       <rules> 
+				<rule name="nullable" message="违预警等级ID不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="预警类型ID" code="warntypeid" type="String">
+	       <rules> 
+				<rule name="nullable" message="预警类型ID不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="指标阈值" code="stthreshold" type="String"></column>
+	   
+	   <column name="指标单位" code="stindexunit" type="String"></column>
+	   
+	   <column name="阈值历时" code="stdt" type="String"></column>
+	   
+	   <column name="指标生效时间" code="strulevalidtime" type="String"></column>
+	   
+	   <column name="指标描述" code="stindexnm" type="String"></column>
+	   
+   </entity>
+   
+   <entity name="表11_历史山洪灾害情况表" code="表11_历史山洪灾害情况表" ><!--（ZT_AD_His_HZRD_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="行政区代码" code="adcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,行政区代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="灾害发生时间" code="hzrdtm" type="String">
+	        <rules> 
+				<rule name="nullable" message="灾害发生时间不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="灾情描述" code="hzrddesc" type="String">
+	        <rules> 
+				<rule name="nullable" message="灾情描述不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+   </entity>
+   
+   <entity name="表12_河流基本情况表" code="表12_河流基本情况表" ><!--（ZT_RV_Info_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="河流代码" code="rvcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,河流代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="河流名称" code="rvnm" type="String">
+	        <rules> 
+				<rule name="nullable" message="河流名称不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="河源位置" code="rvpl" type="String"></column>
+	   
+	   <column name="河长" code="mnstln" type="String"></column>
+	   
+	   <column name="流域面积" code="ttdrbsar" type="String"></column>
+	   
+	   <column name="流域内人口" code="drbspp" type="String"></column>
+	   
+	   <column name="洪水最大安全泄量" code="mxsfds" type="String"></column>
+	   
+	   <column name="洪水平均传播时间" code="avtm" type="String"></column>
+	   
+   </entity>
+   
+   <entity name="表13_堤防基本情况表" code="表13_堤防基本情况表" ><!--（ZT_DK_Info_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="堤防（段）名称代码" code="dkcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,堤防（段）名称代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="堤防（段）名称" code="dknm" type="String">
+	        <rules> 
+				<rule name="nullable" message="堤防（段）名称不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="堤防（段）起点位置" code="bnscbgpl" type="String"></column>
+	   
+	   <column name="堤防（段）终点位置" code="bnscenpl" type="String"></column>
+	   
+	   <column name="堤防（段）类型" code="bnsctp" type="String"></column>
+	   
+	   <column name="堤防（段）长度" code="bnscln" type="String"></column>
+	   
+	   <column name="堤顶高程" code="bntpel" type="String"></column>
+	   
+	   <column name="一般堤高" code="crdkhg" type="String"></column>
+	   
+	   <column name="设计洪水位" code="dsfllv" type="String"></column>
+	    
+	   <column name="保证水位" code="gnwtlv" type="String"></column>
+	   
+	   <column name="警戒水位" code="alwtlv" type="String"></column>
+	   
+	   <column name="设计流量" code="dsfl" type="String"></column>
+	    
+	   <column name="警戒流量" code="alfl" type="String"></column>
+	   
+	   <column name="保护耕地面积" code="prinar" type="String"></column>
+	   
+	   <column name="保护人口" code="ptpp" type="String"></column>
+	   
+   </entity>
+   
+   <entity name="表14_水库基本情况表" code="表14_水库基本情况表" ><!--（ZT_RS_Info_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="水库名称代码" code="rscd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,水库名称代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="水库名称" code="rsnm" type="String">
+	        <rules> 
+				<rule name="nullable" message="水库名称不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="测站代码" code="stcd" type="String"></column>
+	   
+	   <column name="水库所在位置" code="dmstatpl" type="String"></column>
+	   
+	   <column name="所在河流" code="enRvnm3" type="String"></column>
+	   
+	   <column name="管理单位" code="supeAdun" type="String"></column>
+	   
+	   <column name="建设年份" code="engsdate" type="String"></column>
+	   
+	   <column name="集水面积" code="drbsar" type="String"></column>
+	   
+	   <column name="总库容" code="xhst" type="String"></column>
+	    
+	   <column name="设计洪水位" code="dsfllv" type="String"></column>
+	   
+	   <column name="正常蓄水位" code="nrwtlv" type="String"></column>
+	   
+	   <column name="汛限水位" code="flz" type="String"></column>
+	    
+	   <column name="调洪库容" code="flzst" type="String"></column>
+	   
+	   <column name="防洪高水位" code="fldz" type="String"></column>
+	   
+	   <column name="防洪库容" code="fldcp" type="String"></column>
+	   
+	   <column name="坝体类型" code="dmtp" type="String"></column>
+	   
+	   <column name="坝长" code="dmtpln" type="String"></column>
+	   
+	   <column name="坝高" code="mxdmhg" type="String"></column>
+	   
+	   <column name="坝顶高程" code="yhdyDmtpwd" type="String"></column>
+	   
+	   <column name="溢洪道型式" code="dscndtpy" type="String"></column>
+	   
+	   <column name="溢洪道底高程" code="inbtcgel" type="String"></column>
+	   
+	   <column name="溢洪道最大泄量" code="mxdsy" type="String"></column>
+	   
+	   <column name="设计洪水频率" code="flds" type="String"></column>
+	   
+	   <column name="校核洪水频率" code="flch" type="String"></column>
+	   
+	   <column name="现状洪水频率" code="flac" type="String"></column>
+	   
+	   <column name="设计泄流能力" code="xlllDsfllv" type="String"></column>
+	   
+	   <column name="校核泄流能力" code="xlllChfllv" type="String"></column>
+	   
+	   <column name="安全泄流能力" code="dwcnstds" type="String"></column>
+	   
+	   <column name="调度主管部门" code="power" type="String"></column>
+	   
+	   <column name="近期安全鉴定日期" code="safetm" type="String"></column>
+	   
+	   <column name="安全类别" code="safegrade" type="String"></column>
+	   
+	   <column name="水库病险情况" code="safefiles" type="String"></column>
+	   
+	   <column name="影响社会经济指标" code="dwysqn" type="String"></column>
+	   
+	   <column name="预警设施手段" code="xyyjsd" type="String"></column>
+	   
+   </entity>
+   
+   <!-- <entity name="表15_预警部门情况" code="表15_预警部门情况" >name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名）
+   	
+	   <column name="行政区代码" code="adcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,行政区代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="预警等级ID" code="warnGradeID" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,预警等级ID不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="预警类型ID" code="warnTypeID" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,预警类型ID不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="预警状态ID" code="warnStatusID" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,预警状态ID不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	  <column name="部门编码" code="deptCD" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,部门编码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="预警范围" code="warnRange" type="String">
+	        <rules> 
+				<rule name="nullable" message="预警范围不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+   </entity> -->
+   
+   <entity name="表15_预警人员基本情况表" code="表15_预警人员基本情况表" ><!--（ZT_Person_B） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="人员编号" code="personCD" type="String">
+	        <rules> 
+				<rule name="nullable" message="违反数据库中主键约束,人员编号不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="行政区代码" code="adcd" type="String">
+	        <rules> 
+				<rule name="nullable" message="行政区代码不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="姓名" code="name" type="String">
+	        <rules> 
+				<rule name="nullable" message="姓名不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="性别" code="sex" type="String"></column>
+	   
+	   <column name="单位" code="company" type="String"></column>
+	   
+	   <column name="职位" code="position" type="String"></column>
+	   
+	   <column name="手机号码" code="mobile" type="String"></column>
+	   
+	   <column name="办公室号码" code="officeTel" type="String"></column>
+
+   </entity>
+   
+   <entity name="表10_预警设施" code="表10_预警设施" ><!--（ZT_WarnDevices） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="设备名称" code="deviceName" type="String"></column>
+	   
+	   <column name="设备类型" code="deviceType" type="String"></column>
+	   
+	   <column name="所在行政区" code="nativeCountry" type="String"></column>
+	   
+	   <column name="经度" code="lon" type="String">
+	         <rules> 
+				<rule name="nullable" message="经度不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="纬度" code="lat" type="String">
+	         <rules> 
+				<rule name="nullable" message="纬度不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="管理员姓名" code="adminName" type="String"></column>
+	   
+	   <column name="固定电话" code="phone" type="String"></column>
+	   
+	   <column name="手机号码" code="mobile" type="String"></column>
+
+   </entity>
+   
+   <entity name="表16_各类责任人名单" code="表16_各类责任人名单" ><!--（ZT_AllDuty） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="姓名" code="name" type="String"></column>
+	   
+	   <column name="单位" code="unit" type="String"></column>
+	   
+	   <column name="职务" code="position" type="String"></column>
+	   
+	   <column name="办公电话" code="officeTell" type="String"></column>
+	   
+	    <column name="县市区" code="country" type="String"></column>
+	   
+	   <column name="手机" code="mobile" type="String"></column>
+	   
+	   <column name="责任人名单类别" code="type" type="String"></column>
+	   
+	   <column name="责任类型" code="restype" type="String"></column>
+	   
+	   <column name="备注" code="remark" type="String"></column>
+
+   </entity>
+   
+   <entity name="表17_物资储备情况统计表" code="表17_物资储备情况统计表" ><!--（ZT_SuppliesStatics） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="物资类别" code="responCategory" type="String"></column>
+	   
+	   <column name="储备点" code="reservePoint" type="String"></column>
+	   
+	   <column name="仓库面积" code="wareSpace" type="String"></column>
+	   
+	   <column name="草袋" code="strBags" type="String"></column>
+	   
+	   <column name="麻袋" code="sack" type="String"></column>
+	   
+	   <column name="编织袋" code="bags" type="String"></column>
+	   
+	   <column name="膨胀袋" code="expanBag" type="String"></column>
+	   
+	   <column name="编织布" code="wowen" type="String"></column>
+	    
+	   <column name="无纺布（土工布）" code="nonWowen" type="String"></column>
+	     
+	   <column name="土工膜" code="geobrane" type="String"></column>
+	   
+	   <column name="篷布" code="tarp" type="String"></column>
+	   
+	   <column name="橡胶子堤" code="rubber" type="String"></column>
+	    
+	   <column name="救生衣" code="lifeJacket" type="String"></column>
+	     
+	   <column name="救生圈" code="lifeBuoy" type="String"></column>
+	   
+	   <column name="抛投器" code="dumDevice" type="String"></column>
+	   
+	   <column name="抛绳" code="throwing" type="String"></column>
+	    
+	   <column name="冲锋舟" code="assault" type="String"></column>
+	     
+	   <column name="橡皮艇" code="craft" type="String"></column>
+	   
+	   <column name="机动船" code="powerBoat" type="String"></column>
+	   
+	   <column name="划船" code="boating" type="String"></column>
+	    
+	   <column name="操作机" code="pulator" type="String"></column>
+	     
+	   <column name="砂石料" code="sand" type="String"></column>
+	   
+	   <column name="块石" code="stone" type="String"></column>
+	   
+	   <column name="桩木" code="wood" type="String"></column>
+	    
+	   <column name="毛竹" code="bamboo" type="String"></column>
+	     
+	   <column name="铅丝" code="leadWire" type="String"></column>
+	   
+	   <column name="铁钉" code="nails" type="String"></column>
+	   
+	   <column name="钢管（材）" code="pipes" type="String"></column>
+	    
+	   <column name="网笼（兜、箱、片）" code="cage" type="String"></column>
+	     
+	   <column name="尼龙(麻棕)绳" code="nylon" type="String"></column>
+	   
+	   <column name="发电机" code="geonerate" type="String"></column>
+	   
+	   <column name="柴油机" code="diesel" type="String"></column>
+	    
+	   <column name="电动机" code="electricMotor" type="String"></column>
+	     
+	   <column name="固定水泵" code="fixedPump" type="String"></column>
+	   
+	   <column name="移动水泵" code="mobilePump" type="String"></column>
+	   
+	   <column name="小移动发电机" code="smobileGenerator" type="String"></column>
+	    
+	   <column name="汽油泵" code="fulePump" type="String"></column>
+	     
+	   <column name="汽柴油" code="gasAndDie" type="String"></column>
+	   
+	   <column name="电缆" code="cable" type="String"></column>
+	   
+	   <column name="输水管" code="aqueducts" type="String"></column>
+	    
+	   <column name="钢丝绳" code="rope" type="String"></column>
+	     
+	   <column name="帐篷" code="tent" type="String"></column>
+	   
+	   <column name="安全帽" code="securityCap" type="String"></column>
+	   
+	   <column name="手套" code="gloves" type="String"></column>
+	   
+	   <column name="雨衣(裤)" code="rainCoat" type="String"></column>
+	   
+	   <column name="雨鞋" code="rainBoots" type="String"></column>
+	   
+	   <column name="雨伞" code="umbralla" type="String"></column>
+	   
+	   <column name="便携式工作灯" code="worklight" type="String"></column>
+	   
+	   <column name="投光灯" code="spotlights" type="String"></column>
+	   
+	   <column name="移动泛光灯" code="mobileLight" type="String"></column>
+	   
+	   <column name="警报器" code="alertDevice" type="String"></column>
+	   
+	   <column name="卫星电话" code="satePhone" type="String"></column>
+	   
+	   <column name="移动照明车" code="mobileLightVe" type="String"></column>
+	   
+	   <column name="手电筒" code="flashLight" type="String"></column>
+	   
+	   <column name="铁锹" code="shovel" type="String"></column>
+	   
+	   <column name="钢镐" code="steelHo" type="String"></column>
+	   
+	   <column name="双胶轮车" code="twisWheel" type="String"></column>
+	   
+	   <column name="手拉葫芦" code="chainHosi" type="String"></column>
+	   
+	   <column name="打桩机" code="hammers" type="String"></column>
+	   
+	   <column name="挖掘机" code="excavator" type="String"></column>
+	   
+	   <column name="推土机" code="bulldozer" type="String"></column>
+	   
+	   <column name="装载机" code="loader" type="String"></column>
+	   
+	   <column name="自卸车" code="dumpTrack" type="String"></column>
+	   
+	   <column name="吊车" code="crane" type="String"></column>
+	   
+	   <column name="运输车" code="transport" type="String"></column>
+	   
+	   <column name="登高车" code="takeCar" type="String"></column>
+	   
+	   <column name="抽水车" code="pumpCar" type="String"></column>
+	   
+	   <column name="配电箱" code="distrBox" type="String"></column>
+	   
+	   <column name="打井洗井机" code="washMachine" type="String"></column>
+	   
+	   <column name="拉水车" code="pullWaterCar" type="String"></column>
+	   
+	   <column name="蓄水罐" code="storageCar" type="String"></column>
+	   
+	   <column name="净水设备" code="waterDevice" type="String"></column>
+	   
+	   <column name="找水设备" code="findWateDevice" type="String"></column>
+	   
+	   <column name="喷灌机组" code="sprayUnits" type="String"></column>
+	   
+	   <column name="喷灌设备" code="sprayDevices" type="String"></column>
+	   
+	   <column name="物资价值" code="suppliesWorth" type="String"></column>
+	   
+	   <column name="联系人" code="contact" type="String"></column>
+	   
+	   <column name="联系方式" code="contactWays" type="String"></column>
+	   
+	   <column name="经度" code="lotd" type="String">
+	        <rules> 
+				<rule name="nullable" message="经度不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="纬度" code="latd" type="String">
+	        <rules> 
+				<rule name="nullable" message="纬度不允许为空"></rule>
+			</rules>
+	   </column>
+
+   </entity>
+   
+   <entity name="表18_抢险队基本情况统计表" code="表18_抢险队基本情况统计表" ><!--（ZT_ResTeamStatics） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	   <column name="抢险队类型" code="resTeamType" type="String"></column>
+   	   
+	   <column name="抢险队名称" code="resTeamName" type="String"></column>
+	   
+	   <column name="抢险队所在地" code="resTeamPlace" type="String"></column>
+	   
+	   <column name="抢险专业" code="professionalRes" type="String"></column>
+	   
+	   <column name="单位性质" code="unitNature" type="String"></column>
+	   
+	   <column name="编制人员数" code="numberStaff" type="String"></column>
+	   
+	   <column name="现有人员数" code="nowPerson" type="String"></column>
+	   
+	   <column name="挖掘机械" code="machine" type="String"></column>
+	   
+	   <column name="推土机械" code="earthMachine" type="String"></column>
+	   
+	   <column name="吊装设备" code="liftingDevice" type="String"></column>
+	    
+	   <column name="运输车辆" code="transportCar" type="String"></column>
+	   
+	   <column name="潜水设备" code="divingDevice" type="String"></column>
+	   
+	   <column name="大型排涝设备" code="drainDevice" type="String"></column>
+	   
+	   <column name="水泵" code="pump" type="String"></column>
+	    
+	   <column name="冲锋舟" code="assault" type="String"></column>
+	   
+	   <column name="机动船" code="powerBoat" type="String"></column>
+	   
+	   <column name="橡皮艇" code="boat" type="String"></column>
+	   
+	   <column name="发电设备" code="powerDevice" type="String"></column>
+	    
+	   <column name="总资产" code="totalAsset" type="String"></column>
+	   
+	   <column name="设备价值" code="deviceWorth" type="String"></column>
+	   
+	   <column name="联系人" code="contact" type="String"></column>
+	   
+	   <column name="联系方式" code="contactWay" type="String"></column>
+	    
+	   <column name="经度" code="lotd" type="String">
+	        <rules> 
+				<rule name="nullable" message="经度不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="纬度" code="latd" type="String">
+	        <rules> 
+				<rule name="nullable" message="纬度不允许为空"></rule>
+			</rules>
+	   </column>
+
+   </entity>
+   
+   <entity name="表19_防汛抗旱物资分管负责人及物资联系人通讯录" code="表19_防汛抗旱物资分管负责人及物资联系人通讯录" ><!--（ZT_FloodSuppliesContacts） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="县市区" code="counties" type="String"></column>
+	   
+	   <column name="区号" code="areaCode" type="String"></column>
+	   
+	   <column name="值班电话" code="dutyPhone" type="String"></column>
+	   
+	   <column name="传真" code="fax" type="String"></column>
+	   
+	   <column name="负责人" code="perInCharge" type="String"></column>
+	   
+	   <column name="负责人办公室电话" code="fzrofficePhone" type="String"></column>
+	   
+	   <column name="负责人手机" code="fzrmobilePhone" type="String"></column>
+	   
+	   <column name="经办人" code="attn" type="String"></column>
+	   
+	   <column name="经办人办公室电话" code="jbrofficePhone" type="String"></column>
+	   
+	   <column name="经办人手机" code="jbrmobilePhone" type="String"></column>
+
+   </entity>
+   
+   <entity name="表20_防汛抗旱物资储备仓库基本情况调查表" code="表20_防汛抗旱物资储备仓库基本情况调查表" ><!--（ZT_StorageBase） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="所属单位" code="unit" type="String"></column>
+	   
+	   <column name="储备点名称" code="reserveName" type="String"></column>
+	   
+	   <column name="详细地址" code="detailAddress" type="String"></column>
+	   
+	   <column name="仓库面积（㎡）" code="storageArea" type="String"></column>
+	   
+	   <column name="建成年份" code="buildYear" type="String"></column>
+	   
+	   <column name="仓储条件" code="storageConditions" type="String"></column>
+	   
+	   <column name="仓库结构" code="storageStruct" type="String"></column>
+	   
+	   <column name="交通条件" code="trafficConditions" type="String"></column>
+	   
+	   <column name="经度" code="lotd" type="String">
+	      	 <rules> 
+				<rule name="nullable" message="经度不允许为空"></rule>
+			</rules>
+	   </column>
+	   
+	   <column name="纬度" code="latd" type="String">
+	        <rules> 
+				<rule name="nullable" message="纬度不允许为空"></rule>
+			</rules>
+	   </column>
+
+   </entity>
+   
+   <entity name="表21_社会防汛抢险应急资源调查统计表" code="表21_社会防汛抢险应急资源调查统计表" ><!--（ZT_SocialResourcesStatics） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="名称" code="name" type="String"></column>
+	   
+	   <column name="品种/规格" code="bread" type="String"></column>
+	   
+	   <column name="生产厂家" code="manufacturer" type="String"></column>
+	   
+	   <column name="地点" code="address" type="String"></column>
+	   
+	   <column name="企业规模" code="companySize" type="String"></column>
+	   
+	   <column name="日常库存量" code="dailyInventory" type="String"></column>
+	   
+	   <column name="应急生产能力" code="productionCapa" type="String"></column>
+
+   </entity>
+   
+   <entity name="表22_大流量移动水泵统计表" code="表22_大流量移动水泵统计表" ><!--（ZT_HighFlowPumpStatics） name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+   	
+	   <column name="名称" code="name" type="String"></column>
+	   
+	   <column name="数量" code="count" type="String"></column>
+	   
+	   <column name="储存点" code="storagePlace" type="String"></column>
+	   
+	   <column name="储备单位" code="storageUnit" type="String"></column>
+	   
+	   <column name="流量" code="flow" type="String"></column>
+	   
+	   <column name="扬程" code="head" type="String"></column>
+	   
+	   <column name="功率" code="power" type="String"></column>
+	   
+	   <column name="是否拖车（车载）式" code="isCar" type="String"></column>
+	   
+	   <column name="否（自重）" code="isWeight" type="String"></column>
+	   
+	   <column name="有无动力或电源" code="isPower" type="String"></column>
+	   
+	   <column name="进水管" code="inlet" type="String"></column>
+	   
+	   <column name="出水管" code="outlet" type="String"></column>
+	   
+	   <column name="电缆" code="cable" type="String"></column>
+	   
+	   <column name="有无电控箱" code="isControlBox" type="String"></column>
+
+   </entity>
+   
+</excel>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="Sheet1" code="Sheet1" ><!-- name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+		<column name="项目编号" code="task_id" type="String"></column>
+		<column name="年份" code="yr" type="String"></column>
+		<column name="月份" code="mth" type="String"></column>
+		<column name="已完成" code="finished" type="String"></column>
+	    <column name="已支付" code="payed" type="String"></column>	
+   </entity>
+  
+</excel>

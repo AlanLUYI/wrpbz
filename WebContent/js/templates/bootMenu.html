@@ -1,0 +1,25 @@
+<ul class="nav navbar-nav">
+	<% _.each(menus,function(menu,index){ %>
+		<li class="dropdown <%= index === menus.length-1 ? 'last' : '' %>">
+			<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" data-id="<%=menu.id%>">
+				<i class="icon-<%=menu.icon%>"></i>
+				<span class="text-center"><%=menu.name%></span>
+			</a>
+			<!-- <% if(menu.children.length){ %>
+				<ul class="dropdown-menu">
+					<% _.each(menu.children,function(subMenu,subIndex){ %>
+						<li class="<%= subMenu.enable ? '' : 'disabled' %>">
+								<a href="javascript:void(0);" data-id="<%=subMenu.id%>">
+									<i style="background-position: <%=-index*26%>px <%=-subIndex*26%>px;"></i>
+									<span><%=subMenu.name%></span>
+								</a>
+							</li>
+							<% if(subIndex < menu.children.length-1){ %>
+								<li class="divider"></li>
+							<% } %>
+					<% }); %>
+				</ul>
+			<% } %> -->
+		</li>
+	<% }); %>
+</ul>

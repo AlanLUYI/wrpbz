@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="Sheet1" code="Sheet1" ><!-- name是必须设定为Sheet（需要导入的excel文件每一页必须以Sheet开头命名） -->
+		<column name="档案号" code="docNO" type="String"></column>
+		<column name="案卷题名" code="docNM" type="String"></column>
+		<column name="案卷类型" code="type" type="String"></column>
+		<column name="案卷类别" code="docType" type="String"></column>
+	    <column name="页数" code="pages" type="String"></column>	
+	    <column name="编制时间" code="bzTM" type="String"></column>	
+	    <column name="编制单位" code="bzUnit" type="String"></column>
+	    <column name="保管期限" code="deadline" type="String"></column>	
+	    <column name="密级" code="secLvl" type="String"></column>	
+	    <column name="备注" code="refer" type="String"></column>		
+   </entity>
+  
+</excel>

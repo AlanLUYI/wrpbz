@@ -1,0 +1,22 @@
+#radius-range .radius {
+	display: inline-block;
+	border: 1px solid #979797;
+	padding: 2px 8px;
+	margin-bottom: 2px;
+	border-radius: 3px;
+	background: white;
+	cursor: pointer;
+}
+#radius-range .slider-wrapper {
+	padding: 10px 15px 20px;
+	border: 1px solid #979797;
+	border-radius: 3px;
+	background: white;
+	visibility: hidden;
+}
+#radius-range .slider-wrapper.open{
+	visibility: visible;
+}
+#radius-range .slider-container .scale ins{
+	margin-left: -14px !important;
+}

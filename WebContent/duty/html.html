@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>宁波防汛交接班系统</title>		
+		<link rel="stylesheet" href="../libs/pintuer/pintuer.css">			
+		<link rel="stylesheet" href="css.css">	
+						
+		<script src="../libs/jquery/jquery-1.11.1.min.js"></script>
+		<script src="../libs/pintuer/pintuer.js"></script> 
+		<script src="../libs/My97DatePicker/WdatePicker.js"></script>
+		<script src="../libs/artDialog4.1.7/jquery.artDialog.source.js?skin=default"></script>  	 
+		<script src="../libs/jquery.md5.js"></script> 
+		<script src="time.js"></script>	
+		<script src="js.js"></script>	
+		<script src="../js/jsEx.js"></script>			
+	</head>
+	<body>
+		<div class="container" class='margin-top'>	
+			<div class="line">
+				<div class="panel border-sub">
+					<div class="panel-head  border-sub bg-sub panel-head-1">
+						<img src='image/title.png'><span id='showtimes'></span>
+					</div>
+					<div class="panel-body panel-body-1">
+						<div class='div_1'>
+							<strong class='text-big text-sub margin-small-left'>值班情况</strong>
+							<strong id='zgry' class='text-red margin-big-left'></strong>
+							<button id='next_duty' class='button bg-sub float-right margin-top'><span class='icon icon-arrow-right'></span>下一班次</button>
+						</div>
+						<div class='div_2'>
+							<div class="panel panel1">
+							  <div class="panel-head bg-subed">
+							  	<span>带班领导</span>
+							  	<span class='float-right log log_leader' forid="" forname=""><img src='image/rizhi.png'> 日志</span>
+							  </div>
+							  <div class="panel-body">
+							  	 <img id='img1' class='lixian' src=''>
+							  	 <h3 class='text-center margin-top'><strong class='h3_leader'></strong></h3>
+							  </div>
+							</div>
+							<div class="panel panel2">
+							  <div class="panel-head bg-subed">
+							  	<span>值班组长</span>
+							  	<span class='float-right log log_master' forid="" forname=""><img src='image/rizhi.png'> 日志</span>
+							  </div>
+							  <div class="panel-body">
+							  	<img id='img2' class='lixian' src=''>
+							  	<h3 class='text-center margin-top'><strong class=' h3_master'></strong></h3>
+							  </div>
+							</div>	
+							<div class="panel panel3">
+							  <div class="panel-head bg-greened">
+							  	<span>值班组员</span>
+							  	<span class='float-right log log_member' forid="" forname=""><img src='image/rizhi.png'> 日志</span>
+							  </div>
+							  <div class="panel-body">
+							 	 <img id='img3' class='lixian' src=''>
+							 	 <img id='img4' class='lixian' src=''>
+							 	 <div style='width:50%;float:left'>
+							 		 <h3 class='text-center margin-top'><strong class='h3_member_1'></strong></h3>
+							 	 </div>
+							 	 <div style='width:50%;float:right'>
+							 	 	 <h3 class='text-center margin-top'><strong class='h3_member_2'></strong></h3>
+							 	 </div>
+							  </div>
+							</div>
+							<div class="panel panel4">
+							  <div class="panel-head bg-subed">
+							  	<span>值周</span>
+							  	<span class='float-right log log_dirver' forid="" forname=""><img src='image/rizhi.png'> 日志</span>
+							  </div>
+							  <div class="panel-body">
+							  	<img id='img5' class='lixian' src=''>
+							  	<h3 class='text-center margin-top'><strong class='h3_dirver'></strong></h3>
+							  </div>
+							</div>					
+						</div>
+						<div class='div_3'>
+							<strong class='text-big text-sub margin-small-left'>值班事件办理情况</strong>
+							<strong class='text-big text-sub float-right' style='margin-right:270px'>水雨情概况</strong>
+						</div>
+						<div class='div_4'>
+							<div class='div_4_left'></div>
+							<div class='div_4_right'>
+								<h3 class='text-green'>雨情</h3>
+								<span>今日宁波市雨量 <strong class='text-sub' id='rain_one'></strong> 毫米，3天内累计雨量 <strong class='text-sub' id='rain_three'></strong> 毫米，7天内累计雨量 <strong class='text-sub' id='rain_seven'></strong> 毫米。</span>
+								<h3 class='text-green margin-top'>河道水情</h3>
+								<span id='river'>全市主要江河控制站当前水位在警戒水位以上共有 <strong class='text-sub' id='river_count'></strong> 个。</span>
+								<h3 class='text-green margin-top'>水库水情</h3>
+								<span id='res'>全市大中型水库当前超警戒水库共有 <strong class='text-sub' id='res_count'></strong> 个。</span>
+							</div>
+						</div>
+						<div class='div_5'>
+							<strong class='text-big text-sub margin-small-left'>相关链接</strong>
+						</div>
+						<div class='div_6'>
+							<a class='lianjie' id='zbbcx' style='margin-left:150px;'><img src='image/001.png'> 值班表查询</a>
+							<a class='lianjie' id='zbrzcx'><img src='image/002.png'> 值班日志查询</a>
+							<span class='lianjie' id='tongxunlu'><img src='image/005.png'> 通讯录</span>
+							<a href='http://www3.nbswz.com.cn:8080/swz/' target='_blank' class='lianjie'><img src='image/006.png'> 水雨情查询系统</a>
+						</div>
+					</div>
+				</div>
+			</div>									
+		</div>
+		<div id='dialog_in' style='display:none'>
+			<div style='width:350px;height:170px;padding:10px'>
+				<h4 class='margin-bottom'><span class='icon icon-asterisk text-small'></span> 请选择操作类型：</h4>
+				<label><input name="leixing" value='T' type="radio"> 退出本班次其他人员，实施<span class='text-red'>交接班</span></label><br>
+				<label><input name="leixing" value='B' type="radio"> 保留本班次其他人员，实施<span class='text-red'>同时在岗</span></label>
+				<div style='width:100%;margin-top:20px'>
+					<div style='width:120px;float:left'>
+						<h4 class='margin-top'><span class='icon icon-asterisk text-small'></span> 请输入密码：</h4>
+					</div>
+					<div style='width:210px;float:right'>
+						 <input type="password" class="input" id="password"   placeholder="请输入密码" />
+					</div>
+				</div>		   
+			</div>		
+		</div>
+		<div id='dialog_out' style='display:none'>
+			<div style='width:330px;height:140px;padding:10px'>
+				<h2 class='text-center'>尊敬的 <span id='dialog_out_h3'></span></h2>
+				<h4 class='text-center text-red margin-big-bottom'>请输入密码退出！</h4>
+				<div style='margin:0 auto;width:50%'><input type="password" class="input" id="password_out"   placeholder="请输入密码" /></div>
+			</div>
+		</div>
+		<div id='dialog_log' style='display:none;'>
+			<div style='width:520px;height:260px;padding:10px'>
+				<div style='width:245px;float:left'>
+					<form  class="form-x form-auto">
+					 	  <div class="form-group">
+						    <div class="label"><label>事件类型：</label></div>
+						    <div class="field"><select id='sel_type' class='input'><option value=''>请选择</option><option value='接听电话'>接听电话</option><option value='拨打电话'>拨打电话</option><option value='接收传真'>接收传真</option><option value='发送传真'>发送传真</option><option value='其他'>其他</option></select></div>
+						  </div>	
+						  <div class="form-group">
+						    <div class="label"><label>事件内容：</label></div>						    
+						  </div>
+						  <div class="form-group">
+						    <textarea id='shijian' rows="5" cols="30"></textarea>
+						  </div>
+						  <div class="form-group">
+						  	<div class="label"><label>处理状态：</label></div>
+						  	<div class="field"><input style='margin-top:8px' name="do_not" value='yes' type="radio">已完结<input class='margin-left' name="do_not" value='no' type="radio">未完结</div>
+						  </div>		   		  
+					</form>			
+				</div>
+				<div style='width:245px;float:right'>
+					<form  class="form-x form-auto">
+					 	  <div class="form-group">
+						    <div class="label"><label>登记人：</label></div>
+						    <div class="field" style='padding-top:7px' id='dengjiren'></div>					    
+						  </div>
+						  <div class="form-group">
+						    <div class="label"><label>处理意见：</label></div>						    
+						  </div>
+						  <div class="form-group">
+						    <textarea id='yijian' rows="5" cols="30"></textarea>
+						  </div>	
+						  <div class="form-group">
+						  	<div class="label"><label>时间：</label></div>
+						  	<div class="field" style='padding-top: 8px;'><span id='log_time'></span></div>
+						  </div>		   							   		  
+					</form>	
+				</div>
+			</div>
+		</div>
+		<div id='dialog_change' style='display:none;padding:10px'>
+			<div style='width:250px;height:270px;font-size:18px;padding:10px' id='next_day'>
+				
+			</div>
+		</div>
+		<div id='dialog_zbap' style='display:none;padding:0px'>
+			<div style='width:780px;height:500px;'>
+				<iframe frameborder='0' width='780' height='500' id='iframe_zbap'></iframe>
+			</div>
+		</div>
+		<div id='dialog_zbrzcx' style='display:none;'>
+			<div style='width:700px;height:460px;padding:10px'>
+				<div class="panel">
+				  <div class="panel-head">
+				  	<span>开始时间：</span>
+				  	<input class='tm' id='Tm1' onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:00'})"/>
+				  	<span class='margin-big-left'>结束时间：</span>
+				  	<input class='tm' id='Tm2' onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:00'})"/>
+				  	<button id='btn_query_log' class='margin-left button bg-sub'><span class='icon icon-search'> 查询</span></button>
+				  </div>
+				  <div class="panel-body" id='dialog_log_table' style='height:385px;overflow-y:auto'>
+				  
+				  </div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+	</body>
+</html>

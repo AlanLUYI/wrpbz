@@ -1,0 +1,5 @@
+@each $warn-color in $warn-colors{
+	.warn#{index($warn-colors, $warn-color) - 1} {
+		background-color: $warn-color;
+	}
+}

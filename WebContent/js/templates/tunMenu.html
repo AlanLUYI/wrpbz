@@ -1,0 +1,47 @@
+<div class="menu-bar">
+	<ul class="menu-list">
+		<% _.each(menus, function(menu){ %>
+		<li>
+			<a href="javascript: void(0);">
+				<i class="icon-<%=menu.icon%>"></i>
+				<span class="text-center"><%=menu.name%></span>
+			</a>
+		</li>
+		<% }); %>
+	</ul>
+	<div class="clearfix"></div>
+</div>
+<div class="submenu-panel" style="display: none;">
+	<ul class="submenu-list">
+		<% _.each(menus,function(menu,index){ %>
+		<li class="submenu-col">
+			<i class="fa fa-caret-up"></i>
+			<% if(menu.children.length){ %>
+			<ul>
+				<% _.each(menu.children,function(subMenu,subIndex){ %>
+					<% if(!subMenu.children.length){ %>
+					<li class="text-center<%= subMenu.enable ? '' : ' disabled' %>">
+						<a href="<%= subMenu.type == 400 ? subMenu.action : 'javascript:void(0);' %>" data-id="<%=subMenu.id%>" target="<%= subMenu.type == 400 ? '_blank' : '' %>">
+							<span><%=subMenu.name%></span>
+						</a>
+					</li>
+					<% } else { %>
+						<% if(subIndex > 0){ %>
+							<li class="divider"></li>
+						<% } %>
+						<% _.each(subMenu.children,function(thirdMenu){ %>
+							<li class="text-center<%= thirdMenu.enable ? '' : ' disabled' %>">
+								<a href="<%= thirdMenu.type == 400 ? thirdMenu.action : 'javascript:void(0);' %>" data-id="<%=thirdMenu.id%>" target="<%= thirdMenu.type == 400 ? '_blank' : '' %>">
+									<span><%=thirdMenu.name%></span>
+								</a>
+							</li>
+						<% }); %>
+					<% } %>
+				<% }); %>
+			</ul>
+			<% } %>
+		</li>
+		<% }); %>
+	</ul>
+	<div class="clearfix"></div>
+</div>

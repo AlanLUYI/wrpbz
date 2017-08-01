@@ -1,0 +1,311 @@
+html,body,#wrapper {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	font: {
+		family: $font-family;
+	}
+	overflow: hidden;
+}
+
+#page-wrapper{
+	position: absolute;
+	top: $page-top;
+	bottom: 0;
+	width: 100%;
+	overflow: hidden;
+	
+	#map-wrapper {
+		float: left;
+		width: 100%;
+		height: 100%;
+	}
+	
+	#map-inner-wrapper{
+		position: relative;
+		margin-left: 0;
+		height: 100%;
+	}
+	
+	&.show-mini-panel{
+		#map-inner-wrapper{
+			margin-left: $mini-panel-width;
+		}
+		#side-panel-wrapper {
+			width: $mini-panel-width;
+			
+			.sidebar {
+				width: $mini-panel-width - 1;
+				border-right: none;
+			}
+		}
+	}
+	
+	&.show-panel{
+		#map-inner-wrapper{
+			margin-left: $default-panel-width;
+		}
+		#side-panel-wrapper{
+			width: $default-panel-width;
+		}
+	}
+	
+	@at-root #map{
+		width: 100%;
+		height: 100%;
+	}
+	
+	@at-root #side-panel-wrapper {
+		float: left;
+		margin-left: -100%;
+		width: 0;
+		height: 100%;
+		background-color: $panel-bg-color;
+		
+		.side-panel{
+			position: relative;
+			height: 100%;
+			border: none;
+			@include border($direction: right, $color: $border-color);
+			@include border-radius(0);
+			margin-bottom: 0;
+			
+			&.side-panel-noborder{
+				border: none !important;
+			}
+			
+			.panel {
+				border: none;
+				@include border-radius(0);
+				margin-bottom: 0;
+			}
+			
+			.panel-heading {
+				padding: $gutter * 0.5 $gutter;
+				@include border($direction: bottom, $color: $border-color);
+				@include border-top-radius(0);
+				overflow: hidden;
+			}
+			
+			.panel-title{
+				display: inline-block;
+				color: $panel-title-color;
+				letter-spacing: 2px;
+			}
+			
+			.panel-actionbar{
+				padding: $gutter * 0.5 $gutter;
+				@include border($direction: bottom, $color: $border-color);
+			}
+			
+			.panel-footer{
+				background-color: $panel-bg-color;
+				@include border($direction: top, $color: $border-color);
+				@include border-bottom-radius(0);
+				z-index: 3;
+			}
+			
+			.nav {
+				> li{
+					> a{
+						padding: 6px 10px;
+						color: $nav-fg-color;
+					}
+				}
+			}
+			
+			.input-sm{
+				font-size: 13px;
+			}
+			
+			.merged {
+				input{
+					&:first-child {
+						@include border($direction: right, $width: 0);
+					}
+				}
+				
+				.input-group-addon{
+					background-color: $panel-bg-color;
+				}
+				
+				.input-group-addon + input{
+					@include border($direction: left, $width: 0);
+				}
+			}
+			
+			.fixed-table-container{
+				border: none;
+				height: 100% !important;
+				@include border-radius(0);
+				
+				.no-records-found td{
+					text-align: left;
+					padding-left: 70px;
+				}
+			}
+			
+			.full-screen-btn {
+				color: #333333;
+				text-decoration: none;
+				cursor: pointer;
+			}
+		}
+		
+		.side-panel-toggle {
+			position: absolute;
+			display: table;
+			top: 50%;
+			right: -19px;
+			width: 20px;
+			height: 60px;
+			margin-top: -$gutter * 3;
+			background-color: $panel-bg-color;
+			@include border($direction: top, $color: $border-color);
+			@include border($direction: bottom, $color: $border-color);
+			@include border($direction: right, $color: $border-color);
+			@include border-right-radius(3px);
+			cursor: pointer;
+			
+			> i {
+				display: table-cell;
+				vertical-align: middle;
+				color: $border-color;
+			}
+			
+			&:hover > i{
+				color: #3399ff;
+			}
+		}
+		
+		.sidebar {
+			float: left;
+			margin-left: -100%;
+			width: $mini-panel-width;
+			height: 100%;
+			padding: 0 $gutter $gutter;
+			margin-bottom: 0;
+			@include border($direction: right, $color: $border-color);
+			
+			.group-item {
+				font-size: 13px;
+				line-height: 1.53846153;
+				
+				&.active {
+					margin-left: - $gutter;
+					margin-right: - ($gutter + 1);
+					padding-left: $gutter;
+					@include border($direction: right, $color: $panel-bg-color);
+					@include border($direction: top, $color: $border-color);
+					@include border($direction: bottom, $color: $border-color);
+					color: $group-item-color;
+				}
+				
+				&.last {
+					margin-bottom: 0;
+				}
+				
+				input[type=checkbox] {
+					position: static;
+					margin-left: 0;
+					margin-top: 0;
+					vertical-align: middle;
+				}
+				
+				span {
+					display: inline;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+	
+	@at-root #side-panel-inner-wrapper {
+		position: relative;
+		height: 100%;
+		overflow: visible;
+	}
+	
+	.bootstrap-table {
+		height: 100%;
+	
+		table {
+			table-layout: fixed;
+			
+			td{
+				vertical-align: middle !important;
+				word-break: break-all;
+			}
+		}
+	}
+	
+	.like {
+		i {
+			color: $without-like-color;
+		}
+		&.focus{
+			i {
+				color: $like-color;
+			}
+		}
+	}
+	
+	.row-no-location {
+		color: $row-no-location-color;
+	}
+	
+	button.multiselect{
+		padding: 4px 12px;
+	}
+}
+
+
+#module-wrapper {
+	float: left;
+	width: 100%;
+	height: 100%;
+	
+	#module-inner-wrapper {
+		position: relative;
+		margin-left: $mini-panel-width;
+		height: 100%;
+	}
+	
+	.module {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: $panel-bg-color;
+		
+		&.active{
+			z-index: 10;
+		}
+	}
+}
+
+#frame-wrapper {
+	position: absolute;
+	top: $page-top;
+	bottom: 0;
+	width: 100%;
+	z-index: 100;
+	display: none;
+	background-color: $panel-bg-color;
+	overflow: hidden;
+	
+	iframe {
+		width: 100%;
+		height: 100%;
+		border: none;
+	}
+}
+
+
+.map-animate {
+	@include transition(margin-left 0.2s ease);
+}
+
+// .side-panel-animate {
+// 	@include transition(width 0.2s ease);
+// }

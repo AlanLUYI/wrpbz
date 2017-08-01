@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Businesses>
+	<bean name="user" serviceImpl="net.htwater.hos.service.impl.UserServiceImpl"></bean>
+	<bean name="SlgcService" serviceImpl="net.htwater.hos.service.impl.SlgcServiceImpl"></bean>
+	<bean name="allocation" serviceImpl="net.htwater.hos.service.impl.AllocationImpl"></bean>
+	<bean name="util" serviceImpl="net.htwater.hos.service.impl.UtilServiceImpl"></bean>
+	<bean name="webos" serviceImpl="net.htwater.webos.WebosServiceImpl"></bean>
+	<bean name="Wechart" serviceImpl="net.htwater.hos.service.impl.WechartImpl"></bean>
+	<bean name="Fxyw" serviceImpl="net.htwater.hos.service.impl.FxywImpl"></bean>
+	<bean name="SyqService" serviceImpl="net.htwater.hos.service.impl.SyqServiceImpl"></bean>
+	<bean name="GqService" serviceImpl="net.htwater.hos.service.impl.GqServiceImpl"></bean>
+	<bean name="Flood" serviceImpl="net.htwater.hos.service.impl.FloodServiceImpl"></bean>
+	<bean name="FxRelate" serviceImpl="net.htwater.hos.service.impl.FxRelateServiceImpl"></bean>
+	<bean name="htoauth" serviceImpl="net.htwater.hos.service.impl.HtOauthServiceImpl"></bean>
+	<bean name="userutil" serviceImpl="net.htwater.mydemo.service.impl.UserUtilImpl"></bean>
+	<bean name="Xuncha" serviceImpl="net.htwater.mydemo.service.impl.XunchaImpl"></bean>
+	<bean name="mydemo" serviceImpl="net.htwater.mydemo.service.impl.MydemoServiceImpl"></bean>
+	<bean name="FxglService" serviceImpl="net.htwater.mydemo.service.impl.FxglServiceImpl"></bean>
+	<bean name="Xuncha" serviceImpl="net.htwater.mydemo.service.impl.XunchaImpl"></bean>
+	<bean name="Business" serviceImpl="net.htwater.mydemo.service.impl.BusinessServicImpl"></bean>
+	<bean name="office" serviceImpl="net.htwater.mydemo.service.impl.OfficeServiceImpl"></bean>
+</Businesses>

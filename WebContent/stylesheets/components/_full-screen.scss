@@ -1,0 +1,22 @@
+.full-screen {
+	.popover {
+		z-index: $max-z-index;
+	}
+	
+	.datetimepicker{
+		z-index: $max-z-index !important;
+	}
+	
+	#side-panel-wrapper {
+		width: 100% !important;
+		margin-left: 0 !important;
+	}
+	
+	.notification {
+		z-index: $max-z-index;
+	}
+	
+	.side-panel-animate {
+		@include transition-property(none);
+	}
+}

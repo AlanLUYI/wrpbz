@@ -1,0 +1,16 @@
+// Center-align a block level element
+
+@mixin center-block($top: 0, $bottom: 0) {
+  display: block;
+  margin: $top auto $bottom auto;
+}
+
+@mixin hv-center($width, $height){
+  position: absolute;
+  top: 50%;
+  height: 50%;
+  width: $width;
+  height: $height;
+  margin-top: - ceil($width / 2);
+  margin-left: - ceil($height / 2);
+}

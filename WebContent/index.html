@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<title>温瑞平水系工程标准化管理平台</title>
+		<link rel="shortcut icon" href="./logo.png" type="image/x-icon">
+		<link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap-dialog/bootstrap-dialog.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap/css/font-awesome.min.css">
+		<link rel="stylesheet" href="./libs/arcgis/dijit/themes/nihilo/nihilo.css">
+		<link rel="stylesheet" href="./libs/arcgis/esri/css/esri.css">
+		<link rel="stylesheet" href="./libs/bootstrap-table/bootstrap-table.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap-multiselect/bootstrap-multiselect.min.css">
+		<link rel="stylesheet" href="./stylesheets/main.css">
+		<!--[if lt IE 9]>
+      		<script src="./libs/html5shiv/html5shiv.min.js"></script>
+     		<script src="./libs/respond/respond.min.js"></script>
+    	<![endif]-->
+	</head>
+	<body class="nihilo">
+		<div id="wrapper">
+			<nav class="navbar navbar-default navbar-expand" role="navigation">
+				<div class="navbar-header">
+					<a href="javascript: void(0);" class="navbar-brand">
+						<img src="./images/title.png" id='title-png'  height="59" alt="logo">
+					</a>
+				</div>
+				<div id="menu-wrapper" class="navbar-left"></div>
+				<div class="userInfo pull-right">
+					<div class="tile tile-large" id="user-info" title="登录用户">
+						<img src="images/user.png" style="cursor:pointer">
+						<div id='current-user'></div>
+					</div>
+					<div class="tile" id="set" title="密码修改">
+						<a class="set">
+							<img src="images/set.png" style="cursor:pointer">
+						</a>
+					</div>
+					<div class="tile" id="log-out" title="注销">
+						<a class="set">
+							<img src="images/exit.png" style="cursor:pointer">
+						</a>
+					</div>
+				</div>
+			</nav>
+			<div id="page-wrapper">
+				<div id="map-wrapper">
+					<div id="map-inner-wrapper" class="map-animate">
+						<div id="map">
+							<div class="map-tools">
+								<div id="measure-wrapper">
+									<div class="dropdown" title="测量" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+										<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-tags fa-fw"></i>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li role="presentation">
+												<a href="#" role="menuitem" class="measure-distance">
+													<i class="fa fa-magic fa-fw"></i>
+													距离
+												</a>
+											</li>
+											<li role="presentation">
+												<a href="#" role="menuitem" class="measure-area">
+													<i class="fa fa-pie-chart fa-fw"></i>
+													面积
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div id="print-wrapper">
+									<!-- <div class="dropdown" title="出图" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+										<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-print fa-fw"></i>
+										</button>
+										<div class="dropdown-menu" role="menu">
+											<div id="printDijitWrapper"></div>
+										</div>
+									</div> -->
+								</div>
+								<div id="fullextent-wrapper" title="全图" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+									<button class="btn btn-default btn-sm">
+										<i class="fa fa-globe"></i>
+									</button>
+								</div>
+								<!-- <div id="search-wrapper" title="搜索" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+									<div id="search"></div>
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id='submenu-wrapper'>
+					<ul id="accordion" class="accordion"></ul>
+				</div>
+				<div id="frame-wrapper"></div>
+			</div>
+			
+			<div class="legend-animate open" id="legend-wrapper">
+				<div class="legend-title">
+					<i class="fa fa-chevron-circle-down"></i>
+					<span>图例</span>
+				</div>
+				<div class="legend-content"></div>
+			</div>
+		</div>
+		<script src="./js/dojoConfig.js"></script>
+		<script src="./js/jsEx.js"></script>
+		<script src="./libs/arcgis/dojo/dojo.js"></script>
+		<script type="text/javascript">
+			var app;
+			require(["esri/config", "js/BootApp","js/Events", "dojo/ready", "dojo/topic", "jquery","bootstrap"],
+				function(esriConfig,BootApp,Events,ready,topic,$){
+				 	var _uri=location.href;
+
+					ready(function(){
+						app = new BootApp({
+							menuContainer: $("#menu-wrapper"),
+							sidePanelContainer: $("#page-wrapper"),
+							frameContainer: $("#frame-wrapper"),
+							legendContainer: $("#legend-wrapper")
+						});
+						//$("#unit_nm").text(unitnm);
+						app.initPromise.then(function(){						
+							var hash = (window.location.hash || "").substring(1);
+							if(hash){
+								var menu = {enable: true};
+								if(hash.match(/(^type|&type)=([^&#]*)/i)[2] == "200"){
+									var names = hash.match(/(^name|&name)=([^&#]*)/i)[2].split(",");
+									var actions = hash.match(/(^action|&action)=([^&#]*)/i)[2].split(",");
+									var enables = hash.match(/(^enable|&enable)=([^&#]*)/i)[2].split(",");
+									var ids = hash.match(/(^id|&id)=([^&#]*)/i)[2].split(",");
+									var subMenus = [];
+									var len = Math.min(names.length, actions.length, enables.length, ids.length);
+									for(var i = 0; i < len; i++){
+										subMenus.push({name: names[i], action: actions[i], enable: !!(+enables[i]), id: ids[i], children: []});
+									}
+									menu.action = hash.match(/(^comAction|&comAction)=([^&#]*)/i)[2]
+									menu.children = subMenus;
+									menu.type = "200";
+								}else{
+									var params = hash.split("&");
+									for(var i = 0; i < params.length; i++){
+										var pair = params[i].split("=");
+										menu[pair[0]] = pair[1];
+									}
+								}
+								$("#page-wrapper").addClass("show-sub"); //展开左侧面板
+								topic.publish(Events.MENUCLICK, menu);
+								app.htMap.zoomToMaxExtent()
+							}
+							//var html = "<iframe src='main.html'></iframe>";
+							//$("#frame-wrapper").html(html);
+							//$("#frame-wrapper").show();
+							//getCurrentResponse();
+						}, function(error){
+							console.log(error);
+						});
+					
+					$("#log-out").on("click", function(event){
+						event.preventDefault();
+						app.destructor().always(function(){
+							window.location.replace("./login.html");		
+						});
+					});
+					
+					$("#measure-wrapper").on("click",".dropdown-menu a",function(event){
+						event.preventDefault();
+						if($(this).hasClass("measure-distance")){
+							app.htMap.measureLine();
+						}else if($(this).hasClass("measure-area")){
+							app.htMap.measureArea();
+						}
+					});	
+
+					$("#fullextent-wrapper").on("click","button",function(){
+						app.htMap.zoomToMaxExtent();
+					});
+				});
+			});
+		</script>
+		<script>
+			/* var app;
+			require(["esri/config", "js/BootApp","js/Events", "dojo/ready", "dojo/topic", "jquery","bootstrap"],
+					function(esriConfig,BootApp,Events,ready,topic,$){
+				ready(function(){
+					function getCurrentResponse(){
+						$.getJSON("getCurrentResponse!Fxyw",{}).then(function(response){
+							$("#warn-info").attr({
+								"class": function(index, className){
+									return [className.replace(/\bwarn.*?\b/g, "").trim(), "warn"+response.GRADE].join(" ");
+								},
+								"title": response.INFO
+							}).children("span").text(response.NAME);
+						});
+						setTimeout(function(){
+							getCurrentResponse();
+						}, 10*60*1000);
+					}
+					
+					esri.config.defaults.io.corsDetection=false;
+					
+					esriConfig.defaults.io.proxyUrl = "./proxy.jsp";
+					esriConfig.defaults.io.alwaysUseProxy = false; 
+					app = new BootApp({
+						menuContainer: $("#menu-wrapper"),
+						sidePanelContainer: $("#page-wrapper"),
+						frameContainer: $("#frame-wrapper"),
+						legendContainer: $("#legend-wrapper")
+					});
+
+					app.initPromise.then(function(){						
+						var userInfo = app.userInfo;
+						$("#user-info").children("span").text(userInfo.realname);
+						var regionName = userInfo.regionName;
+						if(regionName !== "宁波市"){
+							app.htMap.showCounties([regionName]);
+						}
+						var hash = (window.location.hash || "").substring(1);
+						if(hash){
+							var menu = {enable: true};
+							if(hash.match(/(^type|&type)=([^&#]*)/i)[2] == "200"){
+								var names = hash.match(/(^name|&name)=([^&#]*)/i)[2].split(",");
+								var actions = hash.match(/(^action|&action)=([^&#]*)/i)[2].split(",");
+								var enables = hash.match(/(^enable|&enable)=([^&#]*)/i)[2].split(",");
+								var ids = hash.match(/(^id|&id)=([^&#]*)/i)[2].split(",");
+								var subMenus = [];
+								var len = Math.min(names.length, actions.length, enables.length, ids.length);
+								for(var i = 0; i < len; i++){
+									subMenus.push({name: names[i], action: actions[i], enable: !!(+enables[i]), id: ids[i], children: []});
+								}
+								menu.action = hash.match(/(^comAction|&comAction)=([^&#]*)/i)[2]
+								menu.children = subMenus;
+								menu.type = "200";
+							}else{
+								var params = hash.split("&");
+								for(var i = 0; i < params.length; i++){
+									var pair = params[i].split("=");
+									menu[pair[0]] = pair[1];
+								}
+							}
+							topic.publish(Events.MENUCLICK, menu);
+							app.htMap.zoomToMaxExtent()
+						}
+						getCurrentResponse();
+					}, function(error){
+						console.log(error);
+						//window.location.replace("./login.html");
+					});
+					
+					$("#log-out").on("click", function(event){
+						event.preventDefault();
+						app.destructor().always(function(){
+							 location.href = 'http://profile.qgj.cn/index.shtml?uri=' + encodeURIComponent(_uri);
+						});
+					});
+
+					$("#measure-wrapper").on("click",".dropdown-menu a",function(event){
+						event.preventDefault();
+						if($(this).hasClass("measure-distance")){
+							app.htMap.measureLine();
+						}else if($(this).hasClass("measure-area")){
+							app.htMap.measureArea();
+						}
+					});	
+
+					$("#fullextent-wrapper").on("click","button",function(){
+						app.htMap.zoomToMaxExtent();
+					});
+
+					$("#map").children(".map-tools").find("[data-toggle='tooltip']").tooltip();
+					$("#map").children(".map-tools").on("click","[data-toggle='tooltip']",function(){
+						$(this).tooltip("hide");
+					});
+					$("#map").children(".map-tools").find("[data-toggle='tooltip']").on("show.bs.tooltip",function(event){
+						if($(event.target).hasClass("dropdown") && $(event.target).hasClass("open")){
+							return false;
+						}
+					});
+					
+					$.ajaxPrefilter(function(options, originalOptions, jqXHR){  //tm1或TM1表示开始时间，tm2或TM2表示结束时间，but not always。。。。。
+						var requestType, params, startTime, endTime;
+						requestType = (originalOptions.type || "").toUpperCase(); //jsonp的时候type为undefined
+						if(requestType === "GET"){
+							params = originalOptions.data ? $.param(originalOptions.data) : originalOptions.url;
+						}else if(requestType === "POST"){
+							params = $.param(originalOptions.data);
+						}
+						if(params && originalOptions.url.indexOf("QueryResSupport!SYQ") === -1){
+							startTime = params.match(/(^tm1|&tm1)=([^&#]*)/i) ? decodeURIComponent(params.match(/(^tm1|&tm1)=([^&#]*)/i)[2].replace(/\+/g, "%20")) : null;
+							endTime = params.match(/(^tm2|&tm2)=([^&#]*)/i) ? decodeURIComponent(params.match(/(^tm2|&tm2)=([^&#]*)/i)[2].replace(/\+/g, "%20")) : null;
+							if(startTime && endTime){
+								startTime = startTime.replace(/\-/g, "/");
+								endTime = endTime.replace(/\-/g, "/");
+								if(new Date(startTime).getTime() > new Date(endTime).getTime()){
+									jqXHR.abort();
+									alert("开始时间不能大于结束时间");
+								}
+							}
+						}
+					});
+					
+					$(document).ajaxError(function(e, jqXHR, settings, exception){
+						if(jqXHR.responseText === "非法调用，请登录"){
+							debugger
+							window.location.replace("./login.html");
+						}
+					});
+				});
+			}); */
+		</script>
+	</body>
+</html>

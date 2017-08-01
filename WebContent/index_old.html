@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="renderer" content="webkit">
+		<title>宁波市防汛防旱指挥平台</title>
+		<link rel="shortcut icon" href="./images/xun32.ico" type="image/x-icon">
+		<link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap-dialog/bootstrap-dialog.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css">
+		<link rel="stylesheet" href="./libs/bootstrap/css/font-awesome.min.css">
+		<link rel="stylesheet" href="./libs/arcgis/dijit/themes/nihilo/nihilo.css">
+		<link rel="stylesheet" href="./libs/arcgis/esri/css/esri.css">
+		<link rel="stylesheet" href="./libs/bootstrap-table/bootstrap-table.min.css">
+		<link rel="stylesheet" href="./css/map-widget.css">
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="./css/tunMenu.css">
+		<link rel="stylesheet" href="./css/contextMenu.css">
+		<!--[if lt IE 9]>
+      		<script src="./libs/html5shiv/html5shiv.min.js"></script>
+     		<script src="./libs/respond/respond.min.js"></script>
+    	<![endif]-->
+	</head>
+	<body class="nihilo">
+		<div id="wrapper">
+			<nav class="navbar navbar-default navbar-expand" role="navigation">
+				<div class="navbar-header">
+					<a href="javascript: void(0);" class="navbar-brand">
+						<img src="./images/Antibes.jpg" width="60" height="60" alt="logo" class="img-circle">
+					</a>
+					<div class="pull-left">
+						<h4>宁波市</h4>
+						<h3>防汛防旱指挥平台</h3>
+					</div>
+				</div>
+				<div id="menu-wrapper"></div>
+				<div class="pull-right" style="padding:10px;">
+					<a href="./desktop/index.html" style="color: #fff;font-size:12px;">切换到桌面模式</a>
+				</div>
+			</nav>
+			<div id="page-wrapper">
+				<div id="map-wrapper">
+					<div id="map-inner-wrapper" class="map-animate">
+						<div id="map">
+							<div class="map-tools">
+								<div id="measure-wrapper">
+									<div class="dropdown" title="测量" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+										<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-tags fa-fw"></i>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li role="presentation">
+												<a href="#" role="menuitem" class="measure-distance">
+													<i class="fa fa-magic fa-fw"></i>
+													长度
+												</a>
+											</li>
+											<li role="presentation">
+												<a href="#" role="menuitem" class="measure-area">
+													<i class="fa fa-pie-chart fa-fw"></i>
+													面积
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div id="print-wrapper">
+									<div class="dropdown" title="出图" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+										<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-print fa-fw"></i>
+										</button>
+										<div class="dropdown-menu" role="menu">
+											<div id="printDijitWrapper"></div>
+										</div>
+									</div>
+								</div>
+								<div id="fullextent-wrapper" title="全图" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+									<button class="btn btn-default btn-sm">
+										<i class="fa fa-globe"></i>
+									</button>
+								</div>
+								<div id="search-wrapper" title="搜索" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
+									<div id="search"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="frame-wrapper"></div>
+			<div class="legend-animate open" id="legend-wrapper">
+				<div class="legend-title">
+					<i class="fa fa-chevron-circle-down"></i>
+					<span>图例</span>
+				</div>
+				<div class="legend-content"></div>
+			</div>
+		</div>
+		<script src="./dist/js/dojoConfig.js"></script>
+		<script src="./dist/js/jsEx.js"></script>
+		<script src="./libs/arcgis/init.js"></script>
+		<script>
+			require(["esri/config", "js/TunApp","js/Events", "dojo/ready", "dojo/topic", "jquery","bootstrap"],function(esriConfig,TunApp,Events,ready,topic,$){
+				ready(function(){
+					esriConfig.defaults.io.proxyUrl = "./proxy.jsp";
+					esriConfig.defaults.io.alwaysUseProxy = false; 
+					var app = new TunApp({
+						menuContainer: $("#menu-wrapper"),
+						sidePanelContainer: $("#page-wrapper"),
+						frameContainer: $("#frame-wrapper"),
+						legendContainer: $("#legend-wrapper")
+					});
+
+					app.initPromise.then(function(){
+						var regionName = app.userInfo.regionName;
+						if(regionName !== "宁波市"){
+							app.htMap.showCounties([regionName]);
+						}
+						var hash = (window.location.hash || "").substring(1);
+						if(hash){
+							topic.publish(Events.MENUCLICK,{
+								action: hash,
+								enable: true,
+								type: hash.indexOf("/") === -1 ? "100" : "300"
+							});
+						}
+					}, function(error){
+						console.log(error);
+						window.location.replace("./login.html");
+					});
+
+					$("#measure-wrapper").on("click",".dropdown-menu a",function(event){
+						event.preventDefault();
+						if($(this).hasClass("measure-distance")){
+							app.htMap.measureLine();
+						}else if($(this).hasClass("measure-area")){
+							app.htMap.measureArea();
+						}
+					});	
+
+					$("#fullextent-wrapper").on("click","button",function(){
+						app.htMap.zoomToMaxExtent();
+					});
+
+					$("#map").children(".map-tools").find("[data-toggle='tooltip']").tooltip();
+					$("#map").children(".map-tools").on("click","[data-toggle='tooltip']",function(){
+						$(this).tooltip("hide");
+					});
+					$("#map").children(".map-tools").find("[data-toggle='tooltip']").on("show.bs.tooltip",function(event){
+						if($(event.target).hasClass("dropdown") && $(event.target).hasClass("open")){
+							return false;
+						}
+					});
+					
+					$.ajaxPrefilter(function(options, originalOptions, jqXHR){  //tm1或TM1表示开始时间，tm2或TM2表示结束时间，but not always。。。。。
+						var requestType, params, startTime, endTime;
+						requestType = (originalOptions.type || "").toUpperCase(); //jsonp的时候type为undefined
+						if(requestType === "GET"){
+							params = originalOptions.data ? $.param(originalOptions.data) : originalOptions.url;
+						}else if(requestType === "POST"){
+							params = $.param(originalOptions.data);
+						}
+						if(params && originalOptions.url.indexOf("QueryResSupport!SYQ") === -1){
+							startTime = params.match(/(^tm1|&tm1)=([^&#]*)/i) ? decodeURIComponent(params.match(/(^tm1|&tm1)=([^&#]*)/i)[2].replace(/\+/g, "%20")) : null;
+							endTime = params.match(/(^tm2|&tm2)=([^&#]*)/i) ? decodeURIComponent(params.match(/(^tm2|&tm2)=([^&#]*)/i)[2].replace(/\+/g, "%20")) : null;
+							if(startTime && endTime){
+								startTime = startTime.replace(/\-/g, "/");
+								endTime = endTime.replace(/\-/g, "/");
+								if(new Date(startTime).getTime() > new Date(endTime).getTime()){
+									jqXHR.abort();
+									alert("开始时间不能大于结束时间");
+								}
+							}
+						}
+					});
+					
+					$(document).ajaxError(function(e, jqXHR, settings, exception){
+						if(jqXHR.responseText === "非法调用，请登录"){
+							window.location.replace("./login.html");
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

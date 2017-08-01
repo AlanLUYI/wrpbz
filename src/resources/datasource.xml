@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataSources>
+   <ds name="HOS">
+	    <useCP>true</useCP>
+		<username>sa</username>
+		<password>htwater1,nbsl</password>
+		<dburl>jdbc:sqlserver://192.168.100.1;databaseName=WRP_SMPP</dburl>
+		<classname>com.microsoft.sqlserver.jdbc.SQLServerDriver</classname>
+		<minConnections>6</minConnections>
+		<maxConnections>12</maxConnections>
+   </ds>
+   <ds name="db_htos">
+	    <useCP>true</useCP>
+		<username>sa</username>
+		<password>htwater1,nbsl</password>
+		<dburl>jdbc:sqlserver://192.168.100.1;databaseName=WRP_SMPP</dburl>
+		<classname>com.microsoft.sqlserver.jdbc.SQLServerDriver</classname>
+		<minConnections>6</minConnections>
+		<maxConnections>12</maxConnections>
+	</ds>
+	
+	
+</DataSources>

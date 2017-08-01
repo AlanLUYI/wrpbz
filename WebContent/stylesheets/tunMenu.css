@@ -1,0 +1,174 @@
+#menu-wrapper {
+	position: absolute;
+	left: 300px;
+	overflow: hidden;
+	z-index: 110;
+}
+#menu-wrapper .menu-bar {
+	height: 80px;
+	overflow: hidden;
+}
+#menu-wrapper ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.menu-list {
+	float: left;
+}
+.menu-list>li {
+	float: left;
+	width: 80px;
+	text-align: center;
+}
+.menu-list>li>a {
+	display: block;
+	padding: 15px 0;
+	color: white;
+	text-decoration: none;
+}
+.menu-list li.menu-hover>a {
+	color: #005bac;	/* background: white; */
+}
+.menu-list li>a>i {
+	display: block;
+	margin: 0 auto;
+	width: 30px;
+	height: 30px;
+	background: url(../images/icon-spirit.png) no-repeat;
+	background-position: 4px 4px;
+}
+.menu-list li.menu-hover>a>i {
+	background-position: -28px 4px;
+}
+.menu-list li>a>i.icon-integrate {
+	background-position: 4px 4px;
+}
+.menu-list li.menu-hover>a>i.icon-integrate {
+	background-position: -28px 4px;
+}
+.menu-list li>a>i.icon-warning {
+	background-position: 4px -28px;
+}
+.menu-list li.menu-hover>a>i.icon-warning {
+	background-position: -28px -28px;
+}
+.menu-list li>a>i.icon-forecast {
+	background-position: 4px -60px;
+}
+.menu-list li.menu-hover>a>i.icon-forecast {
+	background-position: -28px -60px;
+}
+.menu-list li>a>i.icon-disaster {
+	background-position: 4px -92px;
+}
+.menu-list li.menu-hover>a>i.icon-disaster {
+	background-position: -28px -92px;
+}
+.menu-list li>a>i.icon-flood {
+	background-position: 4px -124px;
+}
+.menu-list li.menu-hover>a>i.icon-flood {
+	background-position: -28px -124px;
+}
+.menu-list li>a>i.icon-command {
+	background-position: 4px -156px;
+}
+.menu-list li.menu-hover>a>i.icon-command {
+	background-position: -28px -156px;
+}
+.menu-list li>a>i.icon-entrance {
+	background-position: 4px -188px;
+}
+.menu-list li.menu-hover>a>i.icon-entrance {
+	background-position: -28px -188px;
+}
+.menu-list li>a>i.icon-hydro {
+	background-position: 4px -220px;
+}
+.menu-list li.menu-hover>a>i.icon-hydro {
+	background-position: -28px -220px;
+}
+.menu-list li>a>i.icon-config {
+	background-position: 4px -252px;
+}
+.menu-list li.menu-hover>a>i.icon-config {
+	background-position: -28px -252px;
+}
+#menu-wrapper ul.submenu-list {
+	float: left;
+	padding-bottom: 15px;
+	margin-top: 0px;
+	background: white;	/* border-top: 2px solid #d05756; */
+	border-top: 2px solid #13a3fe;
+}
+.submenu-list .submenu-col {
+	position: relative;
+	float: left;
+	height: auto;
+	padding-bottom: 999px;
+	margin-bottom: -999px;
+}
+.submenu-list .submenu-col:nth-child(odd) {
+	background: rgb(247, 247, 247);
+}
+.submenu-list .submenu-col.submenu-hover {
+
+	/* background: #edf4fa; */
+	background: rgba(148, 191, 246, 0.3);
+}
+.submenu-list .submenu-col i {
+	position: absolute;
+	top: -12px;
+	left: 50%;
+	margin-left: -4px;	/* color: #d05756; */
+	color: #13a3fe;
+	display: none;
+}
+.submenu-list .submenu-col.submenu-hover i {
+	display: block;
+}
+.submenu-list .submenu-col.submenu-hover li>a {
+	color: rgb(31, 113, 213);
+}
+.submenu-list .submenu-col>ul {
+	width: 80px;
+	font-size: 12px;
+	padding-bottom: 15px;
+}
+.submenu-list .submenu-col li {
+	margin-top: 8px;
+	overflow: visible;
+	text-align: left;
+	padding: 3px 0 3px 0px;
+	min-height: 24px;
+}
+.submenu-list .submenu-col .divider {
+	height: 1px;
+	padding: 0;
+	margin: 0 0 -1px;
+	min-height: 1px;
+	overflow: hidden;
+	background-color: #ccc;
+}
+.submenu-list .submenu-col li.disabled:hover {
+	background: #dadada;
+}
+.submenu-list .submenu-col li:hover {
+
+	/* background: #7fb8ea; */
+	background: #1f71d5;
+}
+.submenu-list .submenu-col li>a {
+	display: block;	/* color: #d05756; */
+	color: #474b4c;
+	text-align: center;
+	text-decoration: none;
+}
+.submenu-list .submenu-col li:hover a {
+	color: white;
+}
+.submenu-list .submenu-col li.disabled>a {
+	color: #bbb;
+	cursor: default;
+}

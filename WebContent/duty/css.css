@@ -1,0 +1,148 @@
+html,body{
+	width:974px;	
+	height:738px;
+	margin:0 auto;
+}
+.container{
+	width:974px;
+	padding: 0px;
+	height:738px
+}
+.panel-head-1{
+	background-color:rgb(47,128,209);
+}
+.aui_content{
+	padding:0px !important
+}
+#showtimes{
+	float:right;
+	font-size: 20px;
+	margin-top: 13px;
+}
+.panel-body-1{
+	height:663px;
+	background-color:rgb(249,249,247);
+	padding: 0 10px 10px 10px; 
+}
+.div_1{
+	height:50px;
+	width:100%;
+}
+.div_1 strong{
+	position: relative;
+	top: 20px;
+}
+.div_2{
+	height:210px;
+	width:100%;
+	background-color:rgb(255,255,255);
+	border:1px #dddddd solid;
+	border-radius:7px;
+	padding:10px;
+}
+.div_3{
+	height:40px;
+	width:100%;
+}
+.div_3 strong{
+	position: relative;
+	top: 15px;
+}
+.div_4{
+	height:215px;
+	width:100%;
+}
+.div_4_left{
+	width:580px;
+	float:left;
+	height:100%;
+	background-color:rgb(255,255,255);
+	border:1px #dddddd solid;
+	border-radius:7px;
+	background:rgb(255,255,255) url(image/no-data.png) no-repeat center;
+}
+.div_4_right{
+	width:358px;
+	float:right;
+	height:100%;
+	background-color:rgb(255,255,255);
+	border:1px #dddddd solid;
+	border-radius:7px;
+	padding:10px 20px 0px 20px;
+}
+.div_5{
+	height:40px;
+	width:100%;
+}
+.div_5 strong{
+	position: relative;
+	top: 15px;
+}
+.div_6{
+	height:80px;
+	width:100%;
+	background-color:rgb(255,255,255);
+	border:1px #dddddd solid;
+	border-radius:7px;
+}
+.div_6 a{
+	cursor:pointer;
+	position:relative;
+	top:25px;
+	margin-left:80px
+}
+.div_6 span{
+	cursor:pointer;
+	position:relative;
+	top:25px;
+	margin-left:80px
+}
+.panel1,.panel2,.panel3,.panel4{
+	width:203px;
+	float:left;
+	margin-left:10px;	
+}
+.panel3{
+	width:270px
+}
+.div_2 .panel-body{
+	height:146px
+}
+#img1,#img2,#img5{
+	margin-left:39px;
+}
+#img3{
+	margin-left:14.5px;
+}
+#img4{
+	margin-left:29px;	
+}
+.lixian{
+	cursor:pointer;
+}
+.div_4_right span{
+	font-size:15px
+}
+.bg-subed{
+	background-color:rgb(64,176,222);
+}
+.bg-greened{
+	background-color:rgb(34,204,119);
+}
+.log{
+	color:white;
+	cursor:pointer;
+}
+.form-x .form-group .label {		
+	width: 35%;
+}
+.form-x .form-group .field {		
+	width: 65%;
+}
+input[type="radio"]{
+	width:16px;
+	height:16px
+}
+.lianjie:hover{
+	font-weight: bold;
+}

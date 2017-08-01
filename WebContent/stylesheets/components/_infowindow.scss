@@ -1,0 +1,67 @@
+.infowindow {
+	div {
+		@include box-sizing(content-box);
+	}
+	
+	.window {
+		.top {
+			.right {
+				.user {
+					.titlebar {
+						.hide {
+							display: inline !important;
+						}
+					}
+					
+					.layout {
+						overflow: visible !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+#infowindow-tabs {
+	.tabs {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		@include border($direction: bottom, $color: $infowindow-tab-border-color);
+		@include clearfix();
+		
+		li {
+			float: left;
+			position: relative;
+			display: block;
+			margin-right: $gutter * 0.5;
+			margin-bottom: -1px;
+			
+			a {
+				position: relative;
+				display: block;
+				line-height: 1.42857143;
+				padding: $gutter * 0.3 $gutter * 0.5;
+				color: $tab-color;
+				background-color: $tab-bg-color;
+				@include border($direction: null, $color: $tab-border-color);
+				text-decoration: none;
+			}
+			
+			&.selected{
+				a{
+					border-bottom-color: transparent;
+					color: $tab-selected-color;
+					background-color: $tab-content-bg-color;
+				}
+			}
+		}
+	}
+	
+	.tab-content {
+		@include border($direction: null, $color: $tab-border-color);
+		border-top: none;
+		padding: $gutter * 0.5;
+		background-color: $tab-content-bg-color;
+	}
+}

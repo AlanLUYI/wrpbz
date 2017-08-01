@@ -1,0 +1,113 @@
+<div class="print-dijit">
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="print-map-title" class="col-md-3 control-label">标题：</label>
+			<div class="col-md-9">
+				<input type="text" name="print-map-title" id="print-map-title" class="form-control" placeholder="请输入标题" autocomplete="off" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="print-map-format" class="col-md-3 control-label">格式：</label>
+			<div class="col-md-9">
+				<select name="print-map-format" id="print-map-format" class="form-control"></select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="print-map-layout" class="col-md-3 control-label">布局：</label>
+			<div class="col-md-9">
+				<select name="print-map-layout" id="print-map-layout" class="form-control"></select>
+			</div>
+		</div>
+		<div class="form-group" style="margin-bottom:0;">
+			<div class="col-md-offset-3 col-md-9">
+				<div class="btn-group dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+						<i class="fa fa-cog fa-fw"></i>
+						设置
+						<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-menu dropdown-print-settings" role="menu">
+						<label>地图比例/范围</label>
+						<div class="row">
+							<div class="col-md-3">
+								<label class="control-label normal">保持：</label>
+							</div>
+							<div class="col-md-9">
+								<label class="checkbox-inline">
+									<input type="radio" name="preserveScale" id="map-preserve-scale" value="true" checked>地图比例
+								</label>
+								<label class="checkbox-inline">
+									<input type="radio" name="preserveScale" id="map-preserve-extent" value="false">地图范围
+								</label>
+							</div>
+						</div>
+						<label>比例尺</label>
+						<div class="row">
+							<div class="col-md-3">
+								<label for="print-scalebar-unit" class="control-label normal">单位：</label>
+							</div>
+							<div class="col-md-9">
+								<select name="print-scalebar-unit" id="print-scalebar-unit" class="form-control">
+									<option selected="selected" value="Meters">米</option>
+									<option value="Kilometers">千米</option>
+									<option value="Miles">英里</option>
+									<option value="Feet">英尺</option>
+								</select>
+							</div>
+						</div>
+						<label>导出质量</label>
+						<div class="row">
+							<div class="col-md-3">
+								<label for="print-settings-dpi" class="control-label normal">DPI：</label>
+							</div>
+							<div class="col-md-9">
+								<div class="input-group">
+									<input class="form-control" type="text" name="print-settings-dpi" id="print-settings-dpi" value="96" placeholder="请输入DPI" required>
+									<span class="input-group-addon">dpi</span>
+								</div>
+							</div>
+						</div>
+						<label>地图大小</label>
+						<p class="help-block" style="margin-bottom: 5px;">*仅在布局为MAP_ONLY的时候有效</p>
+						<div class="row">
+							<div class="col-md-3">
+								<label for="print-settings-width" class="control-label normal">宽度：</label>
+							</div>
+							<div class="col-md-9">
+								<div class="input-group">
+									<input type="text" name="width" id="print-settings-width" class="form-control" value="3300" placeholder="请输入宽度" required>
+									<span class="input-group-addon">&nbsp;px</span>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="margin-top:5px;">
+							<div class="col-md-3">
+								<label for="print-settings-height" class="control-label normal">高度：</label>
+							</div>
+							<div class="col-md-9">
+								<div class="input-group">
+									<input type="text" name="height" id="print-settings-height" class="form-control" value="2500" placeholder="请输入高度" required>
+									<span class="input-group-addon">&nbsp;px</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="btn-group">
+					<button class="btn btn-primary" type="submit" id="print-map-btn">
+						<i class="fa fa-print fa-fw"></i>
+						导出
+					</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<div class="print-results-wrapper" id="print-results-wrapper" style="display:none;"></div>
+	<div class="btn-group pull-right" id="clear-action-bar" style="display:none;">
+		<button class="btn btn-default" type="button" id="clear-results-btn">
+			<i class="fa fa-trash fa-fw"></i>
+			清空导出结果
+		</button>
+	</div>
+	<div class="clearfix"></div>
+</div>

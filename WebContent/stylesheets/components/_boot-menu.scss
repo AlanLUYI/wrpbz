@@ -1,0 +1,150 @@
+.navbar-expand{
+	.navbar-nav{
+		>li{
+			>a{
+				&,
+				&:hover,
+				&:focus{
+					padding: $gutter * 1.5 $gutter;
+					color: $menu-fg-color;
+				}
+			}
+			
+			&.dropdown.open{
+				> a{
+					color: $menu-open-color;
+					background-color: $menu-open-bg-color;
+				}
+			}
+		}
+	}
+	
+	.dropdown{
+		>a{
+			>i{
+				@include center-block();
+				width: $menu-width;
+				height: $menu-height;
+				background: url($menu-bg-image) no-repeat;
+				background-position: 4px 4px;
+				
+				&.icon-integrate {
+					background-position: 4px 4px;
+				}
+				&.icon-warning {
+					background-position: 4px -28px;
+				}
+				&.icon-forecast{
+					background-position: 4px -60px;
+				}
+				&.icon-disaster{
+					background-position: 4px -92px;
+				}
+				&.icon-flood{
+					background-position: 4px -124px;
+				}
+				&.icon-command{
+					background-position: 4px -156px;
+				}
+				&.icon-entrance{
+					background-position: 4px -188px;
+				}
+				&.icon-hydro{
+					background-position: 4px -220px;
+				}
+				&.icon-config{
+					background-position: 4px -252px;
+				}
+			}
+		}
+		&.open{
+			>a{
+				>i{
+					background-position: -28px 4px;
+					&.icon-integrate {
+						background-position: -28px 4px;
+					}
+					&.icon-warning {
+						background-position: -28px -28px;
+					}
+					&.icon-forecast{
+						background-position: -28px -60px;
+					}
+					&.icon-disaster{
+						background-position: -28px -92px;
+					}
+					&.icon-flood{
+						background-position: -28px -124px;
+					}
+					&.icon-command{
+						background-position: -28px -156px;
+					}
+					&.icon-entrance{
+						background-position: -28px -188px;
+					}
+					&.icon-hydro{
+						background-position: -28px -220px;
+					}
+					&.icon-config{
+						background-position: -28px -252px;
+					}
+				}
+			}
+		}
+		
+	}
+	
+	.dropdown-menu {
+		left: -1px;
+		max-height: 0;
+		display: block;
+		visibility: hidden;
+		overflow: hidden;
+		border-top: none;
+		@include transition(max-height 0.15s ease-out);
+		
+		.divider {
+			margin: $gutter * 0.5 0;
+		}
+		
+		> li {
+			>a {
+				>i{
+					display: inline-block;
+					width: $submenu-icon-width;
+					height: $submenu-icon-height;
+					vertical-align: middle;
+					background: url($submenu-bg-image) no-repeat;
+				}
+				
+				>span{
+					vertical-align: middle;
+				}
+			}
+			
+			&.disabled {
+				>a{
+					color: $submenu-disabled-color;
+					cursor: default;
+				}
+			}
+		}
+	}
+	
+	.dropdown{
+		&.open{
+			.dropdown-menu {
+				visibility: visible;
+				max-height: $dropdown-menu-max-height;
+				@include transition(max-height 0.25s ease-in);
+			}
+		}
+		
+		&.last{
+			.dropdown-menu{
+				left: auto;
+				right: -1px;
+			}
+		}
+	}
+}

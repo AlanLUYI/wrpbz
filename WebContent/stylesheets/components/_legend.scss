@@ -1,0 +1,37 @@
+#legend-wrapper {
+	position: fixed;
+	display: none;
+	right: $legend-right;
+	bottom: $legend-bottom;
+	@include border-radius(5px);
+	background: $legend-bg-color;
+	@include box-shadow(0 5px 10px rgba(0,0,0,.2));
+	
+	.legend-title {
+		height: $legend-title-height;
+		line-height: $legend-title-height;
+		padding: 0 $gutter;
+		@include border-top-radius(5px);
+		color: $legend-title-color;
+		background-color: $legend-title-bg-color;
+		cursor: pointer;
+	}
+	
+	.legend-content {
+		padding: 0 $gutter;
+		max-height: $max-lengend-height;
+		overflow-x: hidden;
+		overflow-y: auto;
+		@include box-sizing(content-box);
+		
+		.legend-item {
+			padding: $gutter * 0.1 0 $gutter * 0.2;
+			margin-bottom: -1px;
+			@include border($direction: bottom, $type: dashed, $color: $border-color);
+		}
+	}
+}
+
+.legend-animate {
+	@include transition(bottom 0.2s ease);
+}

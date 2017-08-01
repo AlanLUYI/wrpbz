@@ -1,0 +1,742 @@
+<html>
+<head>
+<style>
+	body {    /* background: #F0F0F0; */
+		/* background: rgba(0, 68, 204, 0.49); */
+		background: url("images/map.png") center;
+	}
+
+	.outer {
+	    margin: 5px;
+	    height: calc(50% - 10px);
+	    float: left;
+	    overflow: hidden;
+	    box-sizing: border-box;
+	    background: rgba(31, 44, 56, 0.62);
+	    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+	}
+	.inter {    border-bottom: 2px solid rgba(51, 122, 183, 0.5);
+	    text-indent: 8px;
+	    line-height: 40px;
+	    font-family: 黑体;
+	    font-size: 15px;    color: #f5f5f5;
+	}
+	li{list-style-type:none}
+	.buttonClass {cursor: pointer;
+	    border: 1px solid #62a4d4;
+	    background-color: #337ab7;
+	    color: white;
+	    height: 19px;
+	    margin-left: 10px;
+	    border-radius: 2px;
+	    line-height: 0px;}
+		td{font-size:12px;}
+	.titletd td{background-color:#EFEFEF;padding:2px;text-align:center;}
+	.datatd td{background-color:#FFFFFF;height:50px;padding-left:2px;background: transparent;font-size: 14px;}
+	.td2{width:25%;text-align:center;}
+	.td3{width:25px;text-align:center;}
+	.td4{width:25%;text-align:center;}
+	.td5{width:25%;text-align:center;}
+	#customers {
+		font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;  
+		width:100%;
+		height: 97%;
+    	padding: 0px 10px;
+	}
+	#customers td{  
+		text-align: center;
+	    font-size: 26px;
+	    padding: 5px;	   
+	    color: white;
+	       /*  border: 5px solid; */
+	}
+	#customers .blue1{  
+	    /* background: #5fd3cb; */
+	}
+	#customers .blue2{  
+	    /* background: #48c3eb; */
+	}
+	#customers .blue3{  
+	    /* background: #6bb6ef; */
+	}
+	
+	.rlStyle {
+		width:100%;
+		height:35%;
+		background-color:rgba(0, 0, 0, 0.3);
+		color:white;
+		font-size:16px;
+		line-height:30px;
+	}
+	
+	#kTime , #jTime ,#selectId ,#beginTime,#endTime {text-align: center;font-size: 12px;height: 19px;
+	    color: #57585a;
+	    border-radius: 3px; 
+	    border: 1px solid #999;}
+</style>
+<script src="./libs/jquery/jquery-1.11.1.min.js"></script>
+<script src="./libs/highcharts/highcharts.js"></script>
+<script src="./libs/My97DatePicker/WdatePicker.js"></script>
+<script src="./js/util.js"></script>
+<script>
+	var data = [['按时完成数', 45],['未完成数', 200]];
+	var data1 = [['按时完成数', 44],['未完成数', 20]];
+	var data2 = [['按时完成数', 35],['未完成数', 216]];
+	var data3 = [['按时完成数', 22],['未完成数', 279]];
+	var colorCol=['#337ab7','#8bff8c','#038288'];
+	var color = ['#41c932','#ff9d1e'];
+	var colorSun = ['#41c932','#ff9d1e'];
+	var clickType = "all";
+	
+	$(function () {
+		var profile=new window.top.QGJPROFILE;
+		var regionid = profile.DeptId;
+		var user = profile.uid;
+		var type = "all";
+		if(regionid == "hzglc"){
+			type = "hz";
+		}else if(regionid == "jxglc"){
+			type = "jx";
+		}else if(regionid == "nsglc"){
+			type = "nz";
+		}
+		
+		
+		var weekStartDate = getWeekStartDate().format("yyyy-MM-dd");
+		var now =  new Date().format("yyyy-MM-dd");  
+		var month1 = getMonthStartDate().format("yyyy-MM-dd");  
+		
+		//1.已完成巡查情况(上报) 【默认查询本周】
+		var urlsb = "http://115.236.68.196:8080/inspection/queryOverTaskList!Xuncha?callback=?&dep="+type+"&TM1="+weekStartDate+"&TM2="+now;
+		sb(urlsb);
+		
+		//2.事件统计
+		var url_xclass = "http://portal.qgj.cn/bpm/WTApp/EventInfo/SzEvent/StoreDataService/BzhTolEventInfoData.ashx?callback=?&method=GetData&SearchType=QuickSearch&et=2017-06-14&st=2017-06-12&dname=jxglc&xclass={0}&account={1}";
+		var url_taskList = url_xclass.replace("{0}","ptevent").replace("{1}",user);
+/* 		var urlsjddd = "http://portal.qgj.cn/bpm/WTApp/EventInfo/SzEvent/StoreDataService/BzhTolEventInfoData.ashx?callback=?&method=GetData&SearchType=QuickSearch&et=2017-06-14&st=2017-06-12&dname=jxglc";
+		$.getJSON(urlsjddd,function(json){
+			
+			alert('xieyi');
+			
+		});
+		
+		 */
+		 plantColumn();
+
+		//3.巡查完成情况统计【默认查询当月】
+		var url = "http://115.236.68.196:8080/inspection/queryTaskNumByDep!Xuncha?callback=?&TM1="+month1+"&TM2="+now; 
+		//var url = "http://115.236.68.196:8080/inspection/queryTaskNumByDep!Xuncha?callback=?&TM1=2017-05-01&TM2=2017-05-31";
+		xuncha(url,now,now);
+	
+		//4.日历
+		var Day15Before = getDay15Before().format("yyyy-MM-dd");
+
+		var urlrl = "http://115.236.68.196:8080/inspection/queryTaskByDay2!Xuncha?callback=?&dep="+type+"&TM1="+Day15Before+"&TM2="+now;
+		rl(urlrl,Day15Before,now);
+	
+		//5.折线图
+		$.getJSON('zx.json',function(json){ 
+			var data1 = [];//16-03-09
+			var data2 = [];//红线
+			var data3 = [];//2015-09-09
+			var data4 = [];//2014-12-16
+			$.each(json["year1"],function(i,v){//16-03-09
+				data1.push(v.Beach_Altitude);
+				data2.push(v.Critical_Scour_Altitude);
+			});
+			$.each(json["year2"],function(i,v){//2015-09-09
+				data3.push(v.Beach_Altitude);
+			});
+			$.each(json["year3"],function(i,v){//2014-12-16
+				data4.push(v.Beach_Altitude);
+			});
+			plantLine(data1,data2,data3,data4);
+		});
+		
+		//6.系统使用次数统计
+		var startTime = getDayBefore(3).format("yyyy-MM-dd")+" 00:00:00";  
+		var endTime = now+" 23:59:59";
+		var hzglc = 0,nsglc = 0,jxglc = 0,gjg = 0;
+		$.getJSON("getSysLogs!user", { tm1: startTime, tm2: endTime },function(json) {
+				$.each(json,function(i,v){
+					if(v.DeptId == 'hzglc' && v.logtype=="登陆") {
+						hzglc++;
+					}else if(v.DeptId == 'nsglc' && v.logtype=="登陆"){
+						nsglc++;
+					}else if(v.DeptId == 'jxglc' && v.logtype=="登陆"){
+						jxglc++;
+					}else if(v.logtype=="登陆"){
+						gjg++;
+					}
+				});
+				var data = [hzglc,jxglc,nsglc,gjg];
+				
+				plantColumn1(data); 
+			}
+		);
+	
+		
+	});
+	
+	//饼图查询
+	function query() {
+		var beginTime =  $("#beginTime").val();  
+		var endTime = $("#endTime").val();  
+		var url = "http://115.236.68.196:8080/inspection/queryTaskNumByDep!Xuncha?callback=?&TM1="+beginTime+"&TM2="+endTime;
+		xuncha(url,beginTime,endTime);//巡查统计
+	}
+	
+	//日历查询
+	function queryrl() {
+		//清空数据
+		$("tr span").text("--");
+		$("tr p").text("");
+		
+		var type = "all";
+		if($("#selectId").val()==0) {
+			type = "all";
+		}else if($("#selectId").val()==1) {
+			type = "hz";
+		}else if($("#selectId").val()==2) {
+			type = "jx";
+		}else if($("#selectId").val()==3) {
+			type = "ns";
+		}
+		var beginTime =  $("#kTime").val();  
+		var endTime = $("#jTime").val();  
+		var url = "http://115.236.68.196:8080/inspection/queryTaskByDay2!Xuncha?callback=?&dep="+type+"&TM1="+beginTime+"&TM2="+endTime
+		rl(url,beginTime,endTime);//巡查统计
+	}
+	
+	//绘制折线图
+	function plantLine(data1,data2,data3,data4) {
+		$('#containerLine').highcharts({
+			chart: {
+				backgroundColor: 'rgba(255, 255, 255, 0)',
+				type: 'line'
+			},
+			title: {
+				text: ''
+			},
+			credits: {
+				enabled: false
+			},
+			colors: ['#058DC7', 'red','#FFAA25','yellow'],
+			xAxis: {
+				title: {
+					text: '距离(m)',
+					style: {
+						color: 'white'//颜色
+					}
+				},
+				//categories: ['0', '5', '10', '15', '20', '25', '30', '35', '40', '45', '50']
+				//categories: ['0','10','20','30','40','50']
+				labels: {
+					style: {
+						color: 'white'//颜色
+					}
+				}
+			},
+			tooltip: {
+				backgroundColor:'rgba(62,59,59,0.62)',
+				headerFormat: '<b style="color:white;">{point.x+1}</b>',
+				pointFormat: '{series.name}: <b style="color:white;">{point.y}</b>'
+			},
+			yAxis: {
+				title: {
+					text: '高程(m)',
+					style: {
+						color: 'white'//颜色
+					}
+				},
+				labels: {
+					style: {
+						color: 'white'//颜色
+					}
+				}
+			},
+			plotOptions: {
+				series: {
+					cursor: 'pointer',
+					events: {
+						click: function(event) {
+							//location.href="pages/tandiObserve/index.html";
+						}
+					}
+				}
+			},
+			series: [
+				{
+					name: '<b style="color:white;">2016-03-11</b>',
+					data: data1
+				}, {
+					name: '<b style="color:white;">警戒线</b>',
+					data: data2
+				}, {
+					name: '<b style="color:white;">2015-09-09</b>',
+					data: data3
+				}, {
+					name: '<b style="color:white;">2014-12-16</b>',
+					data: data4
+				},
+			]
+		});
+		$("#highcharts-2").bind("click",function(){
+			location.href="pages/tandiObserve/index.html";
+		});
+		$("#highcharts-2").css("cursor","pointer");
+	}
+	
+	//绘制柱状图
+	function plantColumn() {
+		new Highcharts.Chart({
+			chart: {
+				renderTo : 'containerColumn',
+				type: 'column',
+				backgroundColor: 'rgba(255, 255, 255, 0)',
+			},
+			title: {
+				text: ''
+			},
+			colors:colorCol,
+			credits: {
+				enabled: false
+			},
+			xAxis: {
+				categories: ['事件总数', '未处理', '正在处理', '已完成'],
+				labels: {
+					style: {
+						color: 'white'//颜色
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {text: '数量(个)',
+						style: {
+							color: 'white'//颜色
+						}
+				},
+				stackLabels: {
+					enabled: true,
+					style: {
+						fontWeight: 'bold',
+						color: (Highcharts.theme && Highcharts.theme.textColor) || 'white'
+					}
+				},
+				labels: {
+					style: {
+						color: 'white',//颜色
+						fontSize:'14px'  //字体
+					}
+				}
+			},
+			tooltip: {
+				backgroundColor:'rgba(62,59,59,0.62)',
+				headerFormat: '<b style="color:white;">{point.x}</b><br/>',
+				pointFormat: '{series.name}: <b style="color:white;">{point.y}</b><br/>总数: <b style="color:white;">{point.stackTotal}</b>'
+			},
+			plotOptions: {
+				column: {
+					stacking: 'normal',
+					dataLabels: {
+						enabled: false,
+						color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+					}
+				}
+			},
+			series: [{name: '<b style="color:white;">杭州管理处</b>',data: [14, 3, 4, 7]}, 
+					{name: '<b style="color:white;">嘉兴管理处</b>',data: [7, 2, 3, 2]}, 
+					{name: '<b style="color:white;">宁绍管理处</b>',data: [10, 4, 4, 2]}]
+		});
+	}
+	
+	//绘制柱状图1
+	function plantColumn1(data) {
+		new Highcharts.Chart({
+			chart: {
+				renderTo : 'containerColumn1',
+				type: 'column',
+				backgroundColor: 'rgba(255, 255, 255, 0)',
+			},
+			title: {
+				text: ''
+			},
+			colors:colorCol,
+			credits: {
+				enabled: false
+			},
+			legend : {enabled: false},
+			xAxis: {
+				categories: ['杭州管理处', '嘉兴管理处', '宁绍管理处', '局机关'],
+				labels: {
+					style: {
+						color: 'white'//颜色
+					}
+				}
+			},
+			yAxis: {
+				min: 0,
+				title: {
+					text: '次数',
+					style: {
+						color: 'white'//颜色
+					}
+				},
+				stackLabels: {
+					enabled: true,
+					style: {
+						fontWeight: 'bold',
+						color: (Highcharts.theme && Highcharts.theme.textColor) || 'white'
+					}
+				},
+				labels: {
+					style: {
+						color: 'white'//颜色
+					}
+				}
+			},
+			tooltip: {
+				enabled:true,
+				backgroundColor:'rgba(62,59,59,0.62)',
+				headerFormat: '<b style="color:white">{point.x}</b><br/>',
+				pointFormat: '<b style="color:white">总数: {point.stackTotal}</b>'
+			},
+			plotOptions: {
+				column: {
+					stacking: 'normal',
+					dataLabels: {
+						enabled: false,
+						color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+					},
+					cursor: 'pointer',
+					point: {
+						events: {
+							click: function(e){
+								if(e.point.category=="杭州管理处"){
+									clickType = "hz";
+								}else if(e.point.category=="嘉兴管理处"){
+									clickType="jx";
+								}else if(e.point.category=="宁绍管理处"){
+									clickType="ns";
+								}
+								location.href="modules/sys-config/log.html?lx="+clickType;
+							}
+						}
+					},
+				}
+			},
+			series: [{name: '图标',data: data}]
+		});
+	}
+	
+	//上报
+	function sb(url) {
+		$.getJSON(url,function(json){
+			var html = "";
+			$.each(json,function(i,v){
+				var fomatDate = v.over_time.substring(0,11);
+				html += "<tr style='border-bottom: 1px solid #d0d0d0'><td nowrap class='td2'>"+v.Name+"</td><td nowrap class='td3'>"+v.ResName
+				+"</td><td nowrap class='td4'>"+v.isok+"</td><td nowrap class='td5'>"+fomatDate+"</td></tr>"
+			});	
+			$("#tboayId").html(html);
+		}); 
+	}
+	
+	//日历
+	function rl(url,beginTime,endTime) {
+		$.getJSON(url,function(json){
+			
+			var newJson = [];
+			var temp = [];
+			for(var i=0; i<9; i++) {
+				temp.push(json.pop());
+			}
+			for(var i=0; i<9; i++) {
+				newJson.push(temp.pop());
+			}
+			
+			$.each(newJson,function(i,v){
+				var creat_time = v.creat_time;
+				var sumSellnum = v.sumSellnum;
+				//时间处理
+				var date= new Date(Date.parse(creat_time.replace(/-/g,   "/"))); //转换成Data();
+				var month=date.getMonth()+1; //获取当前月份
+				var day = date.getDate();
+				var tdContent = month+"月"+day+"日";
+				$("#span"+i).text(tdContent);
+				$("#p"+i).text(sumSellnum);
+				if(i==8) {
+					return false;
+				}
+			});	
+		}); 
+		$("#kTime").val(beginTime);
+		$("#jTime").val(endTime);
+	} 
+	
+	
+	//巡查统计
+	function xuncha(url,beginTime,endTime) {
+		$.getJSON(url,function(json){
+			data1 = [['<b style="color:white;">按时完成数</b>', json.hz],['<b style="color:white;">未完成数</b>', json.nhz]];
+			data2 = [['<b style="color:white;">按时完成数</b>', json.jx],['<b style="color:white;">未完成数</b>', json.njx]];
+			data3 = [['<b style="color:white;">按时完成数</b>', json.ns],['<b style="color:white;">未完成数</b>', json.nns]];
+			data = [['按时完成数', json.hz+json.jx+json.ns],['未完成数', json.all-(json.hz+json.jx+json.ns)]];
+			plantPie('containerPie1','杭州管理处',colorSun,data1);
+			plantPie('containerPie2','嘉兴管理处',colorSun,data2);
+			plantPie('containerPie3','宁绍管理处',colorSun,data3);
+			plantPie('containerPie','',color,data);
+			$("#beginTime").val(beginTime);
+			$("#endTime").val(endTime);
+		}); 
+	}
+
+	//绘制饼图
+	function plantPie(idName,title,color,data) {
+		new Highcharts.Chart({
+			chart: {
+				renderTo : idName,
+				plotBackgroundColor: null,
+				plotBorderWidth: null,
+				plotShadow: false,
+				backgroundColor: 'rgba(255, 255, 255, 0)',
+			},
+			colors:color,
+			title: {
+				text: title,
+				style: {
+					color: 'white'//颜色
+				}
+			},
+			credits: {
+				enabled: false
+			},
+			tooltip: {
+				backgroundColor:'rgba(62,59,59,0.62)',
+				headerFormat: '<b style="color:white;">{series.name}</b><br>',
+				pointFormat: '{point.name}: <b style="color:white;">{point.y}</b>'
+			},
+			plotOptions: {
+				pie: {
+					allowPointSelect: true,	
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: false
+					},
+					showInLegend: true,
+					events:{  
+						click: function(e) {  
+								location.href="pages/xuncha/index.html";
+							}  
+					}
+				}
+			},
+			series: [{
+				type: 'pie',
+				name: '巡查完成统计(个)',
+				data: data
+			}]
+		});
+	}
+</script>
+</head>
+<body>
+	<!-- 上报模块 -->
+	<div class="outer" style="width: calc(33% - 10px);">
+		<div class="inter" style="height:10%;">巡查情况</div>
+		<div style="width:100%;height:82%;margin: 15px 0px;" id="cotentDiv">
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<!-- 				<tr>
+					<td width="100%">
+						<table width="280" border="0" cellpadding="0" cellspacing="1" bgcolor="#cccccc" style="width:100%;border-collapse:collapse;">
+							<tr class="titletd">
+								<td nowrap class="td1">巡查类型</td>
+								<td nowrap class="td2">巡查员</td>
+								<td nowrap class="td3">名称</td>
+								<td nowrap class="td4">所属科室</td>
+								<td nowrap class="td5">最近登入日期</td>
+							</tr>
+						</table>
+					</td>
+				</tr> -->
+				<tr>
+					<td width="100%">
+						<div id="A1">
+							<div id="A2">
+								<table width="280" border="0" cellpadding="0" cellspacing="1" bgcolor="#cccccc" style="margin-top:-1px;width:100%;border-collapse:collapse;color: white;background: transparent;">
+									<tbody class="datatd" id="tboayId">
+		<!-- 								<tr>
+											<td nowrap class="td1">白银</td>
+											<td nowrap class="td2">1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">3,465</td>
+											<td nowrap class="td5" >元/公斤</td>
+										</tr>
+										<tr>
+											<td nowrap class="td1">锑</td>
+											<td nowrap class="td2">1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">47,000</td>
+											<td nowrap class="td5">元/公斤</td>
+										</tr>
+																				<tr>
+											<td nowrap class="td1">白银</td>
+											<td nowrap class="td2" >1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">3,465</td>
+											<td nowrap class="td5" >元/公斤</td>
+										</tr>
+										<tr>
+											<td nowrap class="td1" >锑</td>
+											<td nowrap class="td2" >1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">47,000</td>
+											<td nowrap class="td5">元/公斤</td>
+										</tr>										<tr>
+											<td nowrap class="td1">白银</td>
+											<td nowrap class="td2" >1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">3,465</td>
+											<td nowrap class="td5" >元/公斤</td>
+										</tr>
+										<tr>
+											<td nowrap class="td1" >锑</td>
+											<td nowrap class="td2" >1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">47,000</td>
+											<td nowrap class="td5">元/公斤</td>
+										</tr>										<tr>
+											<td nowrap class="td1">白银</td>
+											<td nowrap class="td2" >1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">3,465</td>
+											<td nowrap class="td5" >元/公斤</td>
+										</tr>
+										<tr>
+											<td nowrap class="td1" >锑</td>
+											<td nowrap class="td2" >1#</td>
+											<td nowrap class="td3">#</td>
+											<td nowrap class="td4">47,000</td>
+											<td nowrap class="td5">元/公斤</td>
+										</tr> -->
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<!-- 事件统计模块  -->
+	<div class="outer" style="width: calc(34% - 10px);">
+		<div class="inter" style="height:10%;">事件处理统计</div>
+		<div style="margin: 15px 0px;">
+			<div id="containerColumn" style="width:100%;height:82%;"></div>
+		</div>
+	</div>
+	
+	<!-- 三个管理处模块  -->
+	<div class="outer" style="width: calc(33% - 10px);">
+		<div class="inter" style="height:10%;">当月巡查完成统计</div>
+		<div style="width:100%;float:left;text-align:center;color: #57585a;font-size: 12px;margin: 20px 28px;display: inline-flex;">
+			<!-- <span style="font-size: x-small;">巡查任务时间：</span>
+			<input id='beginTime' style="width:24%;margin-right:5px;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">至
+			<input id='endTime' style="width:24%;margin-left:5px;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+			<input type="button" value="查询" class="buttonClass" onclick="query()"/> -->
+		</div>
+		<div style="height: 89.8%;width: 100%;">
+			<div style="width:33%;height:78.5%;float:left" id="containerPie1"></div>
+			<div style="width:33%;height:78.5%;float:left" id="containerPie2"></div>
+			<div style="width:34%;height:78.5%;float:left" id="containerPie3"></div>
+		</div>
+		
+	</div>
+	
+	<!-- 日历模块 -->
+	<div class="outer" style="width: calc(33% - 10px);">
+		<div class="inter" style="height:10%;">每日巡查完成统计</div>
+		<div style="width:100%;height:80%;">
+			<div style="width:100%;height:2%;color: #57585a;font-size: 12px;margin-top: 10px;display: inline-flex;">
+				<!-- <span style="font-size: 12px;margin-left: 22px;">时间：</span>
+				<input id='kTime' style="width:21%;margin-right:5px;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">至
+				<input id='jTime' style="width:21%;margin-left:5px;" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+				<select style="margin-left: 5px;" id="selectId"><option value="0">全部</option><option value="1">杭州管理处</option><option value="2">嘉兴管理处</option><option value="3">宁绍管理处</option></select>
+				<input type="button" value="查询" class="buttonClass" onclick="queryrl();"/> -->
+			</div>
+			<table id="customers">  
+				<tr style="height:33.3%">  
+					<td class="blue1">
+						<div style="width:100%;height:60%;"><p id="p0" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span0">--</span></div>
+					</td>
+					<td class="blue2">
+						<div style="width:100%;height:60%;"><p id="p1" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span1">--</span></div>
+					</td>
+					<td class="blue3">
+						<div style="width:100%;height:60%;"><p id="p2" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span2">--</span></div>
+					</td>
+				</tr>
+				<tr style="height:33.3%">  
+					<td class="blue1">
+						<div style="width:100%;height:60%;"><p id="p3" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span3">--</span></div>
+					</td>  
+					<td class="blue2">
+						<div style="width:100%;height:60%;"><p id="p4" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span4">--</span></div>
+					</td>  
+					<td class="blue3">
+						<div style="width:100%;height:60%;"><p id="p5" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span5">--</span></div>
+					</td>  
+				</tr>
+				<tr style="height:33.3%">  
+					<td id="td9" class="blue1">
+						<div style="width:100%;height:60%;"><p id="p6" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span6">--</span></div>
+					</td>  
+					<td id="td9" class="blue2">
+						<div style="width:100%;height:60%;"><p id="p7" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span7">--</span></div>
+					</td>  
+					<td id="td9" class="blue3">
+						<div style="width:100%;height:60%;"><p id="p8" style="margin:0;padding-top:8px;font-weight:bold;"></p></div>
+						<div class="rlStyle"><span id="span8">--</span></div>
+					</td>  
+				</tr>  
+				</tr>   
+			</table> 
+		</div>
+		
+	</div>
+	
+	<!-- 折线图 -->
+	<div class="outer" style="width: calc(34% - 10px);">
+		<div class="inter" style="height:10%;">塘前滩地观测</div>
+		<div style="height: 82%;margin: 15px 0px;">
+			<div id="containerLine" style="width:100%;height:100%" onclick="alert('123');"></div>
+		</div>
+	</div>
+	
+	<!-- 系统使用统计 -->
+	<div class="outer" style="width: calc(33% - 10px);">
+		<div class="inter" style="height:10%;">系统使用统计</div>
+		<div style="height: 82%;margin: 15px 0px;">
+			<div id="containerColumn1" style="width:100%;height:100%"></div>
+		</div>
+	</div>
+</body>
+	<SCRIPT language=JavaScript>
+		function _InitScroll(_S1,_S2,_W,_H,_T){
+			return "var marqueesHeight"+_S1+"="+_H+";var stopscroll"+_S1+"=false;var scrollElem"+_S1+"=document.getElementById('"+_S1+"');with(scrollElem"+_S1+"){style.width="+_W+";style.height=marqueesHeight"+_S1+";style.overflow='hidden';noWrap=true;}scrollElem"+_S1+".onmouseover=new Function('stopscroll"+_S1+"=true');scrollElem"+_S1+".onmouseout=new Function('stopscroll"+_S1+"=false');var preTop"+_S1+"=0; var currentTop"+_S1+"=0; var stoptime"+_S1+"=0;var leftElem"+_S2+"=document.getElementById('"+_S2+"');scrollElem"+_S1+".appendChild(leftElem"+_S2+".cloneNode(true));setTimeout('init_srolltext"+_S1+"()',"+_T+");function init_srolltext"+_S1+"(){scrollElem"+_S1+".scrollTop=0;setInterval('scrollUp"+_S1+"()',50);}function scrollUp"+_S1+"(){if(stopscroll"+_S1+"){return;}currentTop"+_S1+"+=1;if(currentTop"+_S1+"==(marqueesHeight"+_S1+"+1)) {stoptime"+_S1+"+=1;currentTop"+_S1+"-=1;if(stoptime"+_S1+"=="+_T/50+") {currentTop"+_S1+"=0;stoptime"+_S1+"=0;}}else{preTop"+_S1+"=scrollElem"+_S1+".scrollTop;scrollElem"+_S1+".scrollTop +=1;if(preTop"+_S1+"==scrollElem"+_S1+".scrollTop){scrollElem"+_S1+".scrollTop=0;scrollElem"+_S1+".scrollTop +=1;}}}";
+		}
+		var width = $("#cotentDiv").width();
+		var height = $("#cotentDiv").height();
+		eval(_InitScroll("A1","A2",width,height,4000)); 
+	</SCRIPT>
+</html>

@@ -1,0 +1,25 @@
+.overlay-item {
+	cursor: pointer;
+}
+
+.boom-animation {
+	@include animation(boom 1s ease-in-out infinite);
+}
+
+@include keyframes(boom){
+	35% {
+		@include scale(1.7);
+		@include opacity(0.3);	
+	}
+}
+
+path[data-animation = "splash-animation"]{
+	@include animation(splash 1.5s ease-in-out infinite);
+}
+
+@include keyframes(splash){
+	35% {
+		stroke-opacity: 0.3;
+		fill-opacity: 0.3;
+	}
+}
